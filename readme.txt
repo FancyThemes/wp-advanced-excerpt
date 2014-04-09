@@ -1,12 +1,13 @@
 === Advanced Excerpt ===
-Contributors: basvd
-Tags: excerpt, advanced, post, posts, template, formatting
-Donate link: http://basvd.com/code/advanced-excerpt/
+Contributors: bradt, aprea
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5VPMGLLK94XJC
+Tags: excerpt, post, content, formatting
 Requires at least: 3.2
-Tested up to: 3.3
+Tested up to: 3.9
 Stable tag: 4.1.1
+License: GPLv3
 
-Several improvements over WP's default excerpt. The size can be limited using character or word count, and HTML markup is not removed.
+Control the appearance of WordPress post excerpts
 
 == Description ==
 
@@ -23,13 +24,16 @@ This plugin adds several improvements to WordPress' default way of creating exce
 
 Most of the above features are optional and/or can be customized by the user or theme developer.
 
+Interested in contributing to Advanced Excerpt? Please visit https://github.com/deliciousbrains/wp-advanced-excerpt
+
+Banner image credit - [chillihead](https://www.flickr.com/photos/chillihead/)
+
+Original plugin author - [basvd](http://profiles.wordpress.org/basvd)
+
 == Installation ==
 
-After you've downloaded and extracted the files:
-
-1. Upload the complete `advanced-excerpt` folder to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Go to 'Excerpt' under the 'Settings' menu and configure the plugin
+1. Use WordPress' built-in installer
+2. Access the "Excerpt" menu option under Settings
 
 == Frequently Asked Questions ==
 
@@ -43,9 +47,7 @@ The default excerpt created by WordPress removes all HTML. If your theme uses `t
 
 = Does it work for WordPress version x.x.x? =
 
-During development, the plugin is tested with the most recent version(s) of WordPress. The range of tested versions is listed on this page (3.2 - 3.3 at the moment). It might work on older versions, but it's better to just keep your installation up-to-date.
-
-The plugin requires PHP 5 to work. So if you are using WordPress before 3.2, make sure you have it (WP 3.2 and higher require PHP 5 already).
+During development, the plugin is tested with the most recent version(s) of WordPress. It might work on older versions, but it's better to just keep your installation up-to-date.
 
 = Is this plugin available in my language? / How do I translate this plugin? =
 
