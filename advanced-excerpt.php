@@ -191,12 +191,13 @@ class AdvancedExcerpt {
 			$ellipsis .= sprintf( ' <a href="%s" class="read_more">%s</a>', get_permalink(), $read_more );
 
 		$pos = strrpos( $text, '</' );
-		if ( $pos !== false )
+		if ( $pos !== false ) {
 			// Inside last HTML tag
 			$text = substr_replace( $text, $ellipsis, $pos, 0 );
-		else
+		} else {
 			// After the content
 			$text .= $ellipsis;
+		}
 
 		return $text;
 	}
