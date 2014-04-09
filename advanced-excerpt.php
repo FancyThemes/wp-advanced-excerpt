@@ -106,8 +106,31 @@ class AdvancedExcerpt {
 	}
 
 	private function load_options() {
-		foreach ( $this->default_options as $k => $v ) {
-			$this->default_options[$k] = get_option( $this->name . '_' . $k, $v );
+		/* 
+		 * An older version of this plugin used to individually store each of it's options as a row in wp_options (1 row per option).
+		 * The code below checks if their installations once used an older version of this plugin and attempts to update
+		 * the option storage to the new method (all options stored in a single row in the DB as an array)
+		*/
+		if ( false !== get_option( 'advancedexcerpt_length' ) ) {
+			$legacy_options = array( 'length', 'use_words', 'no_custom', 'no_shortcode', 'finish_word', 'finish_sentence', 'ellipsis', 'read_more', 'add_link', 'allowed_tags' );
+		
+			$options = array();
+			foreach ( $legacy_options as $legacy_option ) {
+				$option_name = 'advancedexcerpt_' . $legacy_option;
+				$settings[$legacy_option] = get_option( $option_name );
+				delete_option( $option_name );
+			}
+
+			update_option( 'advanced_excerpt', $options );
+			$this->options = $options;
+		} else {
+			$this->options = get_option( 'advanced_excerpt' );
+		}
+
+		// if no options exist then this is a fresh install, set up some default options
+		if ( empty( $this->options ) ) {
+			$this->options = $this->default_options;
+			update_option( 'advanced_excerpt', $this->options );
 		}
 	}
 
