@@ -77,9 +77,18 @@ class AdvancedExcerpt {
 	}
 
 	private function __construct() {
+		$this->load_options();
+		
+		if ( is_admin() ) {
+			$this->admin_init();
+		} else {
+			$this->frontend_init();
+		}
+	}
+
+	private function admin_init() {
 		$this->name = strtolower( get_class() );
 		$this->text_domain = $this->name;
-		$this->load_options();
 		$this->plugin_version = $GLOBALS['advanced_excerpt_version'];
 		$this->plugin_folder_name = $GLOBALS['advanced_excerpt_folder'];
 
@@ -87,7 +96,9 @@ class AdvancedExcerpt {
 		register_activation_hook( __FILE__, array( $this, 'install' ) );
 
 		add_action( 'admin_menu', array( $this, 'add_pages' ) );
+	}
 
+	private function frontend_init() {
 		// Replace the default filter (see /wp-includes/default-filters.php)
 		//remove_filter('get_the_excerpt', 'wp_trim_excerpt');
 		// Replace everything
