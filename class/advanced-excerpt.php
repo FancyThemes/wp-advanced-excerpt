@@ -50,21 +50,14 @@ class Advanced_Excerpt {
 
 		if ( is_admin() ) {
 			$this->admin_init();
-		} else {
-			$this->frontend_init();
 		}
+
+		remove_all_filters( 'get_the_excerpt' );
+		add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
 	}
 
 	function admin_init() {
 		add_action( 'admin_menu', array( $this, 'add_pages' ) );
-	}
-
-	function frontend_init() {
-		// Replace the default filter (see /wp-includes/default-filters.php)
-		//remove_filter('get_the_excerpt', 'wp_trim_excerpt');
-		// Replace everything
-		remove_all_filters( 'get_the_excerpt' );
-		add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
 	}
 
 	function load_options() {
