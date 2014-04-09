@@ -56,7 +56,6 @@ class Advanced_Excerpt {
 	}
 
 	function admin_init() {
-		load_plugin_textdomain( 'advanced-excerpt', false, dirname( plugin_basename( __FILE__ ) ) );
 		add_action( 'admin_menu', array( $this, 'add_pages' ) );
 	}
 
