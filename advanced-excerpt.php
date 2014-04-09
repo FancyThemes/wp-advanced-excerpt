@@ -208,10 +208,6 @@ class AdvancedExcerpt {
 		}
 	}
 
-	public function uninstall() {
-		// Nothing to do (note: deactivation hook is also disabled)
-	}
-
 	private function load_options() {
 		foreach ( $this->default_options as $k => $v ) {
 			$this->default_options[$k] = get_option( $this->name . '_' . $k, $v );
