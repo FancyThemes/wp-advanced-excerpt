@@ -23,6 +23,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+$GLOBALS['advanced_excerpt_version'] = '4.1.1';
+$GLOBALS['advanced_excerpt_folder'] = basename( plugin_dir_path( __FILE__ ) );
+
 class AdvancedExcerpt {
 	// Plugin configuration
 	public $name;
@@ -77,6 +80,8 @@ class AdvancedExcerpt {
 		$this->name = strtolower( get_class() );
 		$this->text_domain = $this->name;
 		$this->load_options();
+		$this->plugin_version = $GLOBALS['advanced_excerpt_version'];
+		$this->plugin_folder_name = $GLOBALS['advanced_excerpt_folder'];
 
 		load_plugin_textdomain( $this->text_domain, false, dirname( plugin_basename( __FILE__ ) ) );
 		register_activation_hook( __FILE__, array( $this, 'install' ) );
@@ -97,7 +102,10 @@ class AdvancedExcerpt {
 	}
 
 	public function page_script() {
-		wp_enqueue_script( $this->name . '_script', WP_PLUGIN_URL . '/advanced-excerpt/advanced-excerpt.js', array( 'jquery' ) );
+		$version = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? time() : $this->plugin_version;
+		$plugins_url = trailingslashit( plugins_url() ) . trailingslashit( $this->plugin_folder_name );
+		$src = $plugins_url . 'advanced-excerpt.js';
+		wp_enqueue_script( 'advanced-excerpt-script', $src, array( 'jquery' ), $version, true );
 	}
 
 	public function filter( $text ) {
