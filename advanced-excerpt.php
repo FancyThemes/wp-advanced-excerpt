@@ -90,6 +90,16 @@ class AdvancedExcerpt {
 		add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
 	}
 
+	public function add_pages() {
+		$options_page = add_options_page( __( "Advanced Excerpt Options", $this->text_domain ), __( "Excerpt", $this->text_domain ), 'manage_options', 'options-' . $this->name, array( $this, 'page_options' ) );
+		// Scripts
+		add_action( 'admin_print_scripts-' . $options_page, array( $this, 'page_script' ) );
+	}
+
+	public function page_script() {
+		wp_enqueue_script( $this->name . '_script', WP_PLUGIN_URL . '/advanced-excerpt/advanced-excerpt.js', array( 'jquery' ) );
+	}
+
 	public function filter( $text ) {
 		// Extract options (skip collisions)
 		if ( is_array( $this->options ) ) {
@@ -405,24 +415,6 @@ class AdvancedExcerpt {
 <?php
 	}
 
-	public function page_script() {
-		wp_enqueue_script( $this->name . '_script', WP_PLUGIN_URL . '/advanced-excerpt/advanced-excerpt.js', array(
-				'jquery'
-			) );
-	}
-
-	public function add_pages() {
-		$options_page = add_options_page( __( "Advanced Excerpt Options", $this->text_domain ), __( "Excerpt", $this->text_domain ), 'manage_options', 'options-' . $this->name, array(
-				&$this,
-				'page_options'
-			) );
-
-		// Scripts
-		add_action( 'admin_print_scripts-' . $options_page, array(
-				&$this,
-				'page_script'
-			) );
-	}
 }
 
 AdvancedExcerpt::Instance();
