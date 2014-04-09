@@ -78,7 +78,7 @@ class AdvancedExcerpt {
 
 	private function __construct() {
 		$this->load_options();
-		
+
 		if ( is_admin() ) {
 			$this->admin_init();
 		} else {
@@ -93,7 +93,6 @@ class AdvancedExcerpt {
 		$this->plugin_folder_name = $GLOBALS['advanced_excerpt_folder'];
 
 		load_plugin_textdomain( $this->text_domain, false, dirname( plugin_basename( __FILE__ ) ) );
-		register_activation_hook( __FILE__, array( $this, 'install' ) );
 
 		add_action( 'admin_menu', array( $this, 'add_pages' ) );
 	}
@@ -104,6 +103,12 @@ class AdvancedExcerpt {
 		// Replace everything
 		remove_all_filters( 'get_the_excerpt' );
 		add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
+	}
+
+	private function load_options() {
+		foreach ( $this->default_options as $k => $v ) {
+			$this->default_options[$k] = get_option( $this->name . '_' . $k, $v );
+		}
 	}
 
 	public function add_pages() {
@@ -219,18 +224,6 @@ class AdvancedExcerpt {
 		}
 
 		return $text;
-	}
-
-	public function install() {
-		foreach ( $this->default_options as $k => $v ) {
-			add_option( $this->name . '_' . $k, $v );
-		}
-	}
-
-	private function load_options() {
-		foreach ( $this->default_options as $k => $v ) {
-			$this->default_options[$k] = get_option( $this->name . '_' . $k, $v );
-		}
 	}
 
 	private function update_options() {
