@@ -42,8 +42,7 @@ class AdvancedExcerpt {
 	);
 
 	// Basic HTML tags (determines which tags are in the checklist by default)
-	public static $options_basic_tags = array
-	(
+	public static $options_basic_tags = array(
 		'a', 'abbr', 'acronym', 'b', 'big',
 		'blockquote', 'br', 'center', 'cite', 'code', 'dd', 'del', 'div', 'dl', 'dt',
 		'em', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img', 'ins',
@@ -80,25 +79,15 @@ class AdvancedExcerpt {
 		$this->load_options();
 
 		load_plugin_textdomain( $this->text_domain, false, dirname( plugin_basename( __FILE__ ) ) );
-		register_activation_hook( __FILE__, array(
-				&$this,
-				'install'
-			) );
-		//register_deactivation_hook($file, array(&$this, 'uninstall'));
+		register_activation_hook( __FILE__, array( $this, 'install' ) );
 
-		add_action( 'admin_menu', array(
-				&$this,
-				'add_pages'
-			) );
+		add_action( 'admin_menu', array( $this, 'add_pages' ) );
 
 		// Replace the default filter (see /wp-includes/default-filters.php)
 		//remove_filter('get_the_excerpt', 'wp_trim_excerpt');
 		// Replace everything
 		remove_all_filters( 'get_the_excerpt' );
-		add_filter( 'get_the_excerpt', array(
-				&$this,
-				'filter'
-			) );
+		add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
 	}
 
 	public function filter( $text ) {
