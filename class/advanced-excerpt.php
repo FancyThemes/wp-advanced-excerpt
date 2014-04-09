@@ -231,9 +231,8 @@ class Advanced_Excerpt {
 		update_option( 'advanced_excerpt_allowed_tags', $allowed_tags );
 
 		$this->load_options();
-?>
-        <div id="message" class="updated fade"><p>Options saved.</p></div>
-    <?php
+
+		echo '<div id="message" class="updated fade"><p>' . __( 'Options saved.', 'advanced-excerpt' ) . '</p></div>';
 	}
 
 	function page_options() {
