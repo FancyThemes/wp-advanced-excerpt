@@ -188,9 +188,6 @@ class Advanced_Excerpt {
 	}
 
 	public function text_add_more( $text, $ellipsis, $read_more ) {
-		// New filter in WP2.9, seems unnecessary for now
-		//$ellipsis = apply_filters('excerpt_more', $ellipsis);
-
 		if ( $read_more )
 			$ellipsis .= sprintf( ' <a href="%s" class="read_more">%s</a>', get_permalink(), $read_more );
 
