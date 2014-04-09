@@ -23,8 +23,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-if ( !class_exists( 'AdvancedExcerpt' ) ):
-	class AdvancedExcerpt {
+class AdvancedExcerpt {
 	// Plugin configuration
 	public $name;
 	public $text_domain;
@@ -463,4 +462,3 @@ function the_advanced_excerpt( $args = '', $get = false ) {
 	else
 		the_excerpt();
 }
-endif;
