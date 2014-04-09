@@ -25,6 +25,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 $GLOBALS['advanced_excerpt_version'] = '4.1.1';
 
+if ( version_compare( PHP_VERSION, '5.2', '<' ) ) {
+	// Thanks for this Yoast!
+	if ( is_admin() && ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) ) {
+		require_once ABSPATH.'/wp-admin/includes/plugin.php';
+		deactivate_plugins( __FILE__ );
+		wp_die( __('Advanced Excerpt requires PHP 5.2 or higher, as does WordPress 3.2 and higher. The plugin has now disabled itself.', 'advanced-excerpt' ) );
+	}
+}
+
 function advanced_excerpt_init() {
 	require_once 'class/advanced-excerpt.php';
 
