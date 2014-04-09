@@ -24,8 +24,10 @@
 			var tag_count = last_row.find('input').length;
 			var tag_cell = $(
 			'<td>' +
-				'<input name="allowed_tags[]" type="checkbox" value="' + tag + '" checked="checked" />' +
+				'<label for="ae-' + tag + '">' +
+				'<input name="allowed_tags[]" type="checkbox" id="ae-' + tag + '" value="' + tag + '" checked="checked" />' +
 				'<code>' + tag + '</code>' +
+				'</label>' +
 			'</td>'
 			);
 			
