@@ -15,6 +15,8 @@ class Advanced_Excerpt {
 		'allowed_tags' => array( '_all' )
 	);
 
+	public $checkbox_options = array( 'use_words', 'no_custom', 'no_shortcode', 'finish_word', 'finish_sentence', 'add_link' );
+
 	// Basic HTML tags (determines which tags are in the checklist by default)
 	public static $options_basic_tags = array(
 		'a', 'abbr', 'acronym', 'b', 'big',
@@ -205,32 +207,18 @@ class Advanced_Excerpt {
 	}
 
 	function update_options() {
-		$length       = (int) $_POST['advanced_excerpt_length'];
-		$use_words    = ( 'on' == $_POST['advanced_excerpt_use_words'] ) ? 1 : 0;
-		$no_custom    = ( 'on' == $_POST['advanced_excerpt_no_custom'] ) ? 1 : 0;
-		$no_shortcode = ( 'on' == $_POST['advanced_excerpt_no_shortcode'] ) ? 1 : 0;
-		$finish_word     = ( 'on' == $_POST['advanced_excerpt_finish_word'] ) ? 1 : 0;
-		$finish_sentence = ( 'on' == $_POST['advanced_excerpt_finish_sentence'] ) ? 1 : 0;
-		$add_link     = ( 'on' == $_POST['advanced_excerpt_add_link'] ) ? 1 : 0;
+		$_POST = stripslashes_deep( $_POST );
+		$this->options['length'] = (int) $_POST['length'];
 
-		// TODO: Drop magic quotes (deprecated in php 5.3)
-		$ellipsis  = ( get_magic_quotes_gpc() == 1 ) ? stripslashes( $_POST['advanced_excerpt_ellipsis'] ) : $_POST['advanced_excerpt_ellipsis'];
-		$read_more = ( get_magic_quotes_gpc() == 1 ) ? stripslashes( $_POST['advanced_excerpt_read_more'] ) : $_POST['advanced_excerpt_read_more'];
+		foreach ( $this->checkbox_options as $checkbox_option ) {
+			$this->options[$checkbox_option] = ( isset( $_POST[$checkbox_option] ) ) ? 1 : 0;
+		}
 
-		$allowed_tags = array_unique( (array) $_POST['advanced_excerpt_allowed_tags'] );
+		$this->options['ellipsis'] = $_POST['ellipsis'];
+		$this->options['read_more'] = $_POST['read_more'];
+		$this->options['allowed_tags'] = array_unique( (array) $_POST['allowed_tags'] );
 
-		update_option( 'advanced_excerpt_length', $length );
-		update_option( 'advanced_excerpt_use_words', $use_words );
-		update_option( 'advanced_excerpt_no_custom', $no_custom );
-		update_option( 'advanced_excerpt_no_shortcode', $no_shortcode );
-		update_option( 'advanced_excerpt_finish_word', $finish_word );
-		update_option( 'advanced_excerpt_finish_sentence', $finish_sentence );
-		update_option( 'advanced_excerpt_ellipsis', $ellipsis );
-		update_option( 'advanced_excerpt_read_more', $read_more );
-		update_option( 'advanced_excerpt_add_link', $add_link );
-		update_option( 'advanced_excerpt_allowed_tags', $allowed_tags );
-
-		$this->load_options();
+		update_option( 'advanced_excerpt', $this->options );
 
 		echo '<div id="message" class="updated fade"><p>' . __( 'Options saved.', 'advanced-excerpt' ) . '</p></div>';
 	}
@@ -241,10 +229,10 @@ class Advanced_Excerpt {
 			$this->update_options();
 		}
 
-		extract( $this->default_options, EXTR_SKIP );
+		extract( $this->options, EXTR_SKIP );
 
-		$ellipsis  = htmlentities( $ellipsis );
-		$read_more = htmlentities( $read_more );
+		$ellipsis	= htmlentities( $ellipsis );
+		$read_more	= htmlentities( $read_more );
 
 		$tag_list = array_unique( self::$options_basic_tags + $allowed_tags );
 		sort( $tag_list );
