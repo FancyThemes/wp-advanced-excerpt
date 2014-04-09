@@ -1,18 +1,18 @@
 (function($) {
 
 	$(document).ready(function() {
-		var tag_cols = $('#tags_table tr:eq(1) td').length;
+		var tag_cols = $('#tags-table tr:eq(1) td').length;
 		
 		var tag_list = new Array();
-		$('#tags_table input').each(function(i, el){
+		$('#tags-table input').each(function(i, el){
 		   tag_list.push($(el).val()); 
 		});
 		
 		// Add a tag to the checkbox table
-		$('#add_tag').click(function(event){
+		$('#add-tag').click(function(event){
 			event.preventDefault();
 			
-			var tag = $('#more_tags option:selected').val();
+			var tag = $('#more-tags option:selected').val();
 			
 			// No duplicate tags in the table
 			if($.inArray(tag, tag_list) > -1){
@@ -20,7 +20,7 @@
 			}
 			tag_list.push(tag);
 			
-			var last_row = $('#tags_table tr:last-child');
+			var last_row = $('#tags-table tr:last-child');
 			var tag_count = last_row.find('input').length;
 			var tag_cell = $(
 			'<td>' +
@@ -47,13 +47,13 @@
 		});
 		
 		// Check all boxes
-		$('#select_all').click(function(event){
+		$('#select-all').click(function(event){
 			event.preventDefault();
 			$('input[name="allowed_tags[]"]:gt(0)').attr('checked', 'checked');
 		});
 		
 		// Uncheck all boxes
-		$('#select_none').click(function(event){
+		$('#select-none').click(function(event){
 			event.preventDefault();
 			$('input[name="allowed_tags[]"]:gt(0)').removeAttr('checked');
 		});

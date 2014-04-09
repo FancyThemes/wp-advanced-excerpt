@@ -11,8 +11,8 @@
 				<?php _e( "Excerpt Length:", 'advanced-excerpt' ); ?></label></th>
 				<td>
 					<input name="length" type="text" id="length" value="<?php echo $length; ?>" size="2"/>
-					<label for="use_words">
-					<input name="use_words" type="checkbox" id="use_words" value="on"<?php echo ( 1 == $use_words ) ? ' checked="checked"' : ''; ?> />
+					<label for="use-words">
+					<input name="use_words" type="checkbox" id="use-words" value="on"<?php echo ( 1 == $use_words ) ? ' checked="checked"' : ''; ?> />
 					<?php _e( "Use words?", 'advanced-excerpt' ); ?>
 					</label>
 				</td>
@@ -34,13 +34,13 @@
 					</label>
 				</th>
 				<td>
-					<label for="finish_word">
-					<input name="finish_word" type="checkbox" id="finish_word" value="on"<?php echo ( 1 == $finish_word ) ? ' checked="checked"' : ''; ?> />
+					<label for="finish-word">
+					<input name="finish_word" type="checkbox" id="finish-word" value="on"<?php echo ( 1 == $finish_word ) ? ' checked="checked"' : ''; ?> />
 					<?php _e( "Word", 'advanced-excerpt' ); ?><br/>
 					</label>
 
-					<label for="finish_sentence">
-					<input name="finish_sentence" type="checkbox" id="finish_sentence" value="on"<?php echo ( 1 == $finish_sentence ) ? ' checked="checked"' : ''; ?> />
+					<label for="finish-sentence">
+					<input name="finish_sentence" type="checkbox" id="finish-sentence" value="on"<?php echo ( 1 == $finish_sentence ) ? ' checked="checked"' : ''; ?> />
 					<?php _e( "Sentence", 'advanced-excerpt' ); ?>
 					</label>
 
@@ -50,40 +50,40 @@
 			</tr>
 			<tr valign="top">
 				<th scope="row">
-					<label for="read_more">
+					<label for="read-more">
 					<?php _e( "&lsquo;Read-more&rsquo; Text:", 'advanced-excerpt' ); ?>
 					</label>
 				</th>
 				<td>
-					<input name="read_more" type="text" id="read_more" value="<?php echo $read_more; ?>" />
-					<label for="add_link">
-					<input name="add_link" type="checkbox" id="add_link" value="on" <?php echo ( 1 == $add_link ) ? 'checked="checked"' : ''; ?> />
+					<input name="read_more" type="text" id="read-more" value="<?php echo $read_more; ?>" />
+					<label for="add-link">
+					<input name="add_link" type="checkbox" id="add-link" value="on" <?php echo ( 1 == $add_link ) ? 'checked="checked"' : ''; ?> />
 					<?php _e( "Add link to excerpt", 'advanced-excerpt' ); ?>
 					</label>
 				</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row">
-					<label for="no_custom">
+					<label for="no-custom">
 					<?php _e( "No Custom Excerpts:", 'advanced-excerpt' ); ?>
 					</label>
 				</th>
 				<td>
-					<label for="no_custom">
-					<input name="no_custom" type="checkbox" id="no_custom" value="on" <?php echo ( 1 == $no_custom ) ? 'checked="checked"' : ''; ?> />
+					<label for="no-custom">
+					<input name="no_custom" type="checkbox" id="no-custom" value="on" <?php echo ( 1 == $no_custom ) ? 'checked="checked"' : ''; ?> />
 					<?php _e( "Generate excerpts even if a post has a custom excerpt attached.", 'advanced-excerpt' ); ?>
 					</label>
 				</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row">
-					<label for="no_shortcode">
+					<label for="no-shortcode">
 					<?php _e( "Strip Shortcodes:", 'advanced-excerpt' ); ?>
 					</label>
 				</th>
 				<td>
-					<label for="no_shortcode">
-					<input name="no_shortcode" type="checkbox" id="no_shortcode" value="on" <?php echo ( 1 == $no_shortcode ) ? 'checked="checked"' : ''; ?> />
+					<label for="no-shortcode">
+					<input name="no_shortcode" type="checkbox" id="no-shortcode" value="on" <?php echo ( 1 == $no_shortcode ) ? 'checked="checked"' : ''; ?> />
 					<?php _e( "Remove shortcodes from the excerpt. <em>(recommended)</em>", 'advanced-excerpt' ); ?>
 					</label>
 				</td>
@@ -91,7 +91,7 @@
 			<tr valign="top">
 				<th scope="row"><?php _e( "Keep Markup:", 'advanced-excerpt' ); ?></th>
 				<td>
-					<table id="tags_table">
+					<table id="tags-table">
 						<tr>
 							<td colspan="<?php echo $tag_cols; ?>">
 								<label for="allowed-tags">
@@ -125,15 +125,15 @@
 							<?php endif; ?>
 					</table>
 
-					<a href="" id="select_all">Select all</a> / <a href="" id="select_none">Select none</a><br />
+					<a href="" id="select-all">Select all</a> / <a href="" id="select-none">Select none</a><br />
 					More tags:
-					<select name="more_tags" id="more_tags">
+					<select name="more_tags" id="more-tags">
 					<?php foreach ( self::$options_all_tags as $tag ) : ?>
 						<option value="<?php echo $tag; ?>"><?php echo $tag; ?></option>
 					<?php endforeach; ?>
 					</select>
 
-					<input type="button" name="add_tag" id="add_tag" class="button" value="Add tag" />
+					<input type="button" name="add_tag" id="add-tag" class="button" value="Add tag" />
 				</td>
 			</tr>
 		</table>
