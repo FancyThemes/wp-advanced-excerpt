@@ -105,7 +105,7 @@ class Advanced_Excerpt {
 	function page_script() {
 		$version = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? time() : $this->plugin_version;
 		$plugins_url = trailingslashit( plugins_url() ) . trailingslashit( $this->plugin_folder_name );
-		$src = $plugins_url . 'advanced-excerpt.js';
+		$src = $plugins_url . 'assets/js/advanced-excerpt.js';
 		wp_enqueue_script( 'advanced-excerpt-script', $src, array( 'jquery' ), $version, true );
 	}
 
