@@ -19,7 +19,7 @@
 				<?php _e( "Ellipsis:", 'advanced-excerpt' ); ?></label></th>
 				<td>
 					<input name="ellipsis" type="text" id="ellipsis" value="<?php echo $ellipsis; ?>" size="5" />
-					<?php _e( '(use <a href="http://www.w3schools.com/tags/ref_entities.asp">HTML entities</a>)', 'advanced-excerpt' ); ?>
+					<?php printf( __( '(use <a href="%s" target="_blank">HTML entities</a>)', 'advanced-excerpt' ), 'http://entitycode.com' ); ?>
 					<br />
 					<?php _e( "Will substitute the part of the post that is omitted in the excerpt.", 'advanced-excerpt' ); ?>
 				</td>
