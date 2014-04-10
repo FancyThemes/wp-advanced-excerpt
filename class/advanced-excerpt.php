@@ -76,7 +76,7 @@ class Advanced_Excerpt {
 			$options = array();
 			foreach ( $legacy_options as $legacy_option ) {
 				$option_name = 'advancedexcerpt_' . $legacy_option;
-				$settings[$legacy_option] = get_option( $option_name );
+				$options[$legacy_option] = get_option( $option_name );
 				delete_option( $option_name );
 			}
 
