@@ -113,13 +113,15 @@ class Advanced_Excerpt {
 		extract( $this->default_options, EXTR_SKIP );
 
 		// Avoid custom excerpts
-		if ( !empty( $text ) && !$no_custom )
+		if ( !empty( $text ) && !$no_custom ) {
 			return $text;
+		}
 
 		// Get the full content and filter it
 		$text = get_the_content( '' );
-		if ( 1 == $no_shortcode )
+		if ( 1 == $no_shortcode ) {
 			$text = strip_shortcodes( $text );
+		}
 		$text = apply_filters( 'the_content', $text );
 
 		// From the default wp_trim_excerpt():
@@ -127,18 +129,21 @@ class Advanced_Excerpt {
 		$text = str_replace( ']]>', ']]&gt;', $text );
 
 		// Determine allowed tags
-		if ( !isset( $allowed_tags ) )
+		if ( !isset( $allowed_tags ) ) {
 			$allowed_tags = self::$options_all_tags;
+		}
 
-		if ( isset( $exclude_tags ) )
+		if ( isset( $exclude_tags ) ) {
 			$allowed_tags = array_diff( $allowed_tags, $exclude_tags );
+		}
 
 		// Strip HTML if allow-all is not set
 		if ( !in_array( '_all', $allowed_tags ) ) {
-			if ( count( $allowed_tags ) > 0 )
+			if ( count( $allowed_tags ) > 0 ) {
 				$tag_string = '<' . implode( '><', $allowed_tags ) . '>';
-			else
+			} else {
 				$tag_string = '';
+			}
 			$text = strip_tags( $text, $tag_string );
 		}
 
@@ -188,8 +193,9 @@ class Advanced_Excerpt {
 	}
 
 	public function text_add_more( $text, $ellipsis, $read_more ) {
-		if ( $read_more )
+		if ( $read_more ) {
 			$ellipsis .= sprintf( ' <a href="%s" class="read_more">%s</a>', get_permalink(), $read_more );
+		}
 
 		$pos = strrpos( $text, '</' );
 		if ( $pos !== false ) {
