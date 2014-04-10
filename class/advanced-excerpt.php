@@ -51,7 +51,6 @@ class Advanced_Excerpt {
 		$this->plugin_dir_path = plugin_dir_path( $plugin_file_path );
 		$this->plugin_folder_name = basename( $this->plugin_dir_path );
 		$this->plugin_basename = plugin_basename( $plugin_file_path );
-		$this->template_dir = $this->plugin_dir_path . 'template/';
 
 		if ( is_admin() ) {
 			$this->admin_init();
