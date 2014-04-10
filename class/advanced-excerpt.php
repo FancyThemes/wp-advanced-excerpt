@@ -223,7 +223,7 @@ class Advanced_Excerpt {
 
 		$this->options['ellipsis'] = $_POST['ellipsis'];
 		$this->options['read_more'] = $_POST['read_more'];
-		$this->options['allowed_tags'] = array_unique( (array) $_POST['allowed_tags'] );
+		$this->options['allowed_tags'] = ( isset( $_POST['allowed_tags'] ) ) ? array_unique( (array) $_POST['allowed_tags'] ) : array();
 
 		update_option( 'advanced_excerpt', $this->options );
 
