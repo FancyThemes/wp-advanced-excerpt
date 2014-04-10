@@ -108,6 +108,15 @@ class Advanced_Excerpt {
 	}
 
 	function filter( $text ) {
+		/*
+		 * Allow developers to skip running the advanced excerpt filters on certain page types.
+		 * They can do so by passing in an array of page types they'd like to skip
+		 * e.g. array( 'search', 'author' );
+		 */
+		$page_type = $this->get_current_page_type();
+		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', array() );
+		if ( $page_type && in_array( $page_type, $skip_page_types ) ) return $text;
+
 		// Extract options (skip collisions)
 		if ( is_array( $this->options ) ) {
 			extract( $this->options, EXTR_SKIP );
@@ -248,6 +257,19 @@ class Advanced_Excerpt {
 		$tag_cols = 5;
 
 		require_once $this->plugin_dir_path . 'template/options.php';
+	}
+
+	function get_current_page_type() {
+		global $wp_query;
+		if ( ! isset( $wp_query ) ) return false;
+		$wp_query_object_vars = get_object_vars( $wp_query );
+
+		foreach( $wp_query_object_vars as $key => $value ) {
+			if ( false === strpos( $key, 'is_' ) ) continue;
+			if ( true === $value ) return str_replace( 'is_', '', $key );
+		}
+
+		return false;
 	}
 
 }
