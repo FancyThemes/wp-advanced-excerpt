@@ -2,6 +2,11 @@
 class Advanced_Excerpt {
 	public $options;
 
+	/*
+	 * Some of the following options below are linked to checkboxes on the plugin's option page.
+	 * If any checkbox options are added/removed/modified in the future please ensure you also update
+	 * the $checkbox_options variable in the update_options() method.
+	 */ 
 	public $default_options = array(
 		'length' => 40,
 		'use_words' => 1,
@@ -14,8 +19,6 @@ class Advanced_Excerpt {
 		'add_link' => 0,
 		'allowed_tags' => array( '_all' )
 	);
-
-	public $checkbox_options = array( 'use_words', 'no_custom', 'no_shortcode', 'finish_word', 'finish_sentence', 'add_link' );
 
 	// Basic HTML tags (determines which tags are in the checklist by default)
 	public static $options_basic_tags = array(
@@ -213,7 +216,9 @@ class Advanced_Excerpt {
 		$_POST = stripslashes_deep( $_POST );
 		$this->options['length'] = (int) $_POST['length'];
 
-		foreach ( $this->checkbox_options as $checkbox_option ) {
+		$checkbox_options = array( 'use_words', 'no_custom', 'no_shortcode', 'finish_word', 'finish_sentence', 'add_link' );
+
+		foreach ( $checkbox_options as $checkbox_option ) {
 			$this->options[$checkbox_option] = ( isset( $_POST[$checkbox_option] ) ) ? 1 : 0;
 		}
 
