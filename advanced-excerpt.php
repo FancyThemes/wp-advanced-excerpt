@@ -10,7 +10,10 @@ Author URI: http://deliciousbrains.com/
 
 $GLOBALS['advanced_excerpt_version'] = '4.1.1';
 
-load_plugin_textdomain( 'advanced-excerpt', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+function advanced_excerpt_load_textdomain() {
+	load_plugin_textdomain( 'advanced-excerpt', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+add_action( 'wp_loaded', 'advanced_excerpt_load_textdomain' );
 
 require_once 'class/advanced-excerpt.php';
 require_once 'functions/functions.php';
