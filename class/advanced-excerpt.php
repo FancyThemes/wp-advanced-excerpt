@@ -20,28 +20,8 @@ class Advanced_Excerpt {
 		'allowed_tags' => array( '_all' )
 	);
 
-	// Basic HTML tags (determines which tags are in the checklist by default)
-	public static $options_basic_tags = array(
-		'a', 'abbr', 'acronym', 'b', 'big',
-		'blockquote', 'br', 'center', 'cite', 'code', 'dd', 'del', 'div', 'dl', 'dt',
-		'em', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img', 'ins',
-		'li', 'ol', 'p', 'pre', 'q', 's', 'small', 'span', 'strike', 'strong', 'sub',
-		'sup', 'table', 'td', 'th', 'tr', 'u', 'ul'
-	);
-
-	// Almost all HTML tags (extra options)
-	public static $options_all_tags = array(
-		'a', 'abbr', 'acronym', 'address', 'applet',
-		'area', 'b', 'bdo', 'big', 'blockquote', 'br', 'button', 'caption', 'center',
-		'cite', 'code', 'col', 'colgroup', 'dd', 'del', 'dfn', 'dir', 'div', 'dl',
-		'dt', 'em', 'fieldset', 'font', 'form', 'frame', 'frameset', 'h1', 'h2', 'h3',
-		'h4', 'h5', 'h6', 'hr', 'i', 'iframe', 'img', 'input', 'ins', 'isindex', 'kbd',
-		'label', 'legend', 'li', 'map', 'menu', 'noframes', 'noscript', 'object',
-		'ol', 'optgroup', 'option', 'p', 'param', 'pre', 'q', 's', 'samp', 'script',
-		'select', 'small', 'span', 'strike', 'strong', 'style', 'sub', 'sup', 'table',
-		'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'tt', 'u', 'ul',
-		'var'
-	);
+	public $options_basic_tags; // Basic HTML tags (determines which tags are in the checklist by default)
+	public $options_all_tags; // Almost all HTML tags (extra options)
 
 	function __construct( $plugin_file_path ) {
 		$this->load_options();
@@ -51,6 +31,27 @@ class Advanced_Excerpt {
 		$this->plugin_dir_path = plugin_dir_path( $plugin_file_path );
 		$this->plugin_folder_name = basename( $this->plugin_dir_path );
 		$this->plugin_basename = plugin_basename( $plugin_file_path );
+
+		$this->options_basic_tags = apply_filters( 'advanced_excerpt_basic_tags', array(
+			'a', 'abbr', 'acronym', 'b', 'big',
+			'blockquote', 'br', 'center', 'cite', 'code', 'dd', 'del', 'div', 'dl', 'dt',
+			'em', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img', 'ins',
+			'li', 'ol', 'p', 'pre', 'q', 's', 'small', 'span', 'strike', 'strong', 'sub',
+			'sup', 'table', 'td', 'th', 'tr', 'u', 'ul'
+		) );
+
+		$this->options_all_tags = apply_filters( 'advanced_excerpt_all_tags', array(
+			'a', 'abbr', 'acronym', 'address', 'applet',
+			'area', 'b', 'bdo', 'big', 'blockquote', 'br', 'button', 'caption', 'center',
+			'cite', 'code', 'col', 'colgroup', 'dd', 'del', 'dfn', 'dir', 'div', 'dl',
+			'dt', 'em', 'fieldset', 'font', 'form', 'frame', 'frameset', 'h1', 'h2', 'h3',
+			'h4', 'h5', 'h6', 'hr', 'i', 'iframe', 'img', 'input', 'ins', 'isindex', 'kbd',
+			'label', 'legend', 'li', 'map', 'menu', 'noframes', 'noscript', 'object',
+			'ol', 'optgroup', 'option', 'p', 'param', 'pre', 'q', 's', 'samp', 'script',
+			'select', 'small', 'span', 'strike', 'strong', 'style', 'sub', 'sup', 'table',
+			'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'tt', 'u', 'ul',
+			'var'
+		) );
 
 		if ( is_admin() ) {
 			$this->admin_init();
@@ -132,7 +133,7 @@ class Advanced_Excerpt {
 
 		// Determine allowed tags
 		if ( !isset( $allowed_tags ) ) {
-			$allowed_tags = self::$options_all_tags;
+			$allowed_tags = $this->options_all_tags;
 		}
 
 		if ( isset( $exclude_tags ) ) {
@@ -242,7 +243,7 @@ class Advanced_Excerpt {
 		$ellipsis	= htmlentities( $ellipsis );
 		$read_more	= htmlentities( $read_more );
 
-		$tag_list = array_unique( self::$options_basic_tags + $allowed_tags );
+		$tag_list = array_unique( array_merge( $this->options_basic_tags, $allowed_tags ) );
 		sort( $tag_list );
 		$tag_cols = 5;
 

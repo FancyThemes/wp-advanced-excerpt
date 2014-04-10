@@ -125,7 +125,7 @@
 					<a href="" id="select-all">Select all</a> / <a href="" id="select-none">Select none</a><br />
 					More tags:
 					<select name="more_tags" id="more-tags">
-					<?php foreach ( self::$options_all_tags as $tag ) : ?>
+					<?php foreach ( $this->options_all_tags as $tag ) : ?>
 						<option value="<?php echo $tag; ?>"><?php echo $tag; ?></option>
 					<?php endforeach; ?>
 					</select>
