@@ -196,7 +196,8 @@ class Advanced_Excerpt {
 
 	public function text_add_more( $text, $ellipsis, $read_more ) {
 		if ( $read_more ) {
-			$ellipsis .= sprintf( ' <a href="%s" class="read-more">%s</a>', get_permalink(), $read_more );
+			$link_template = apply_filters( 'advanced_excerpt_read_more_link_template', ' <a href="%s" class="read-more">%s</a>', get_permalink(), $read_more );
+			$ellipsis .= sprintf( $link_template, get_permalink(), $read_more );
 		}
 
 		$pos = strrpos( $text, '</' );
