@@ -122,15 +122,15 @@
 							<?php endif; ?>
 					</table>
 
-					<a href="" id="select-all">Select all</a> / <a href="" id="select-none">Select none</a><br />
-					More tags:
+					<a href="" id="select-all"><?php _e( "Select all", 'advanced-excerpt' ) ); ?></a> / <a href="" id="select-none"><?php _e( "Select none", 'advanced-excerpt' ) ); ?></a><br />
+					<?php _e( "More tags", 'advanced-excerpt' ) ); ?>
 					<select name="more_tags" id="more-tags">
 					<?php foreach ( $this->options_all_tags as $tag ) : ?>
 						<option value="<?php echo $tag; ?>"><?php echo $tag; ?></option>
 					<?php endforeach; ?>
 					</select>
 
-					<input type="button" name="add_tag" id="add-tag" class="button" value="Add tag" />
+					<input type="button" name="add_tag" id="add-tag" class="button" value="<?php _e( "Add tag", 'advanced-excerpt' ) ); ?>" />
 				</td>
 			</tr>
 		</table>
