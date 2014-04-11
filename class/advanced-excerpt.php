@@ -70,42 +70,50 @@ class Advanced_Excerpt {
 		 * The code below checks if their installations once used an older version of this plugin and attempts to update
 		 * the option storage to the new method (all options stored in a single row in the DB as an array)
 		*/
+		$update_options = false;
 		if ( false !== get_option( 'advancedexcerpt_length' ) ) {
 			$legacy_options = array( 'length', 'use_words', 'no_custom', 'no_shortcode', 'finish_word', 'finish_sentence', 'ellipsis', 'read_more', 'add_link', 'allowed_tags' );
-		
-			$options = array();
+
 			foreach ( $legacy_options as $legacy_option ) {
 				$option_name = 'advancedexcerpt_' . $legacy_option;
-				$options[$legacy_option] = get_option( $option_name );
+				$this->options[$legacy_option] = get_option( $option_name );
 				delete_option( $option_name );
 			}
-
-			// convert legacy options: use_words, finish_word & finish_sentence to their udpated equivalents
-			$options['length_type'] = ( 1 == $options['use_words'] ) ? 'words' : 'characters';
-
-			if ( 0 == $options['finish_word'] && 0 == $options['finish_sentence'] ) {
-				$options['finish'] = 'none';
-			} else if ( 1 == $options['finish_word'] && 1 == $options['finish_sentence'] ) {
-				$options['finish'] = 'sentence';
-			} else if ( 0 == $options['finish_word'] && 1 == $options['finish_sentence'] ) {
-				$options['finish'] = 'sentence';
-			} else {
-				$options['finish'] = 'word';
-			}
-
-			unset( $options['use_words'] );
-			unset( $options['finish_word'] );
-			unset( $options['finish_sentence'] );
-
-			update_option( 'advanced_excerpt', $options );
-			$this->options = $options;
+			$update_options = true;
 		} else {
 			$this->options = get_option( 'advanced_excerpt' );
+		}
+
+		// convert legacy option use_words to it's udpated equivalent
+		if ( isset( $this->options['use_words'] ) ) {
+			$this->options['length_type'] = ( 1 == $options['use_words'] ) ? 'words' : 'characters';
+			unset( $this->options['use_words'] );
+			$update_options = true;
+		}
+
+		// convert legacy options finish_word & finish_sentence to their udpated equivalents
+		if ( isset( $options['finish_sentence'] ) ) {
+			if ( 0 == $options['finish_word'] && 0 == $options['finish_sentence'] ) {
+				$this->options['finish'] = 'none';
+			} else if ( 1 == $options['finish_word'] && 1 == $options['finish_sentence'] ) {
+				$this->options['finish'] = 'sentence';
+			} else if ( 0 == $options['finish_word'] && 1 == $options['finish_sentence'] ) {
+				$this->options['finish'] = 'sentence';
+			} else {
+				$this->options['finish'] = 'word';
+			}
+			unset( $this->options['finish_word'] );
+			unset( $this->options['finish_sentence'] );
+			$update_options = true;
 		}
 
 		// if no options exist then this is a fresh install, set up some default options
 		if ( empty( $this->options ) ) {
 			$this->options = $this->default_options;
+			$update_options = true;
+		}
+
+		if ( $update_options ) {
 			update_option( 'advanced_excerpt', $this->options );
 		}
 	}
