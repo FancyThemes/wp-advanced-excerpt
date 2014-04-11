@@ -86,18 +86,18 @@ class Advanced_Excerpt {
 
 		// convert legacy option use_words to it's udpated equivalent
 		if ( isset( $this->options['use_words'] ) ) {
-			$this->options['length_type'] = ( 1 == $options['use_words'] ) ? 'words' : 'characters';
+			$this->options['length_type'] = ( 1 == $this->options['use_words'] ) ? 'words' : 'characters';
 			unset( $this->options['use_words'] );
 			$update_options = true;
 		}
 
 		// convert legacy options finish_word & finish_sentence to their udpated equivalents
-		if ( isset( $options['finish_sentence'] ) ) {
-			if ( 0 == $options['finish_word'] && 0 == $options['finish_sentence'] ) {
+		if ( isset( $this->options['finish_sentence'] ) ) {
+			if ( 0 == $this->options['finish_word'] && 0 == $this->options['finish_sentence'] ) {
 				$this->options['finish'] = 'none';
-			} else if ( 1 == $options['finish_word'] && 1 == $options['finish_sentence'] ) {
+			} else if ( 1 == $this->options['finish_word'] && 1 == $this->options['finish_sentence'] ) {
 				$this->options['finish'] = 'sentence';
-			} else if ( 0 == $options['finish_word'] && 1 == $options['finish_sentence'] ) {
+			} else if ( 0 == $this->options['finish_word'] && 1 == $this->options['finish_sentence'] ) {
 				$this->options['finish'] = 'sentence';
 			} else {
 				$this->options['finish'] = 'word';
