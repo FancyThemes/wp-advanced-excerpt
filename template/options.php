@@ -4,45 +4,67 @@
 	<?php if ( function_exists( 'wp_nonce_field' ) ) wp_nonce_field( 'advanced_excerpt_update_options' ); ?>
 		<table class="form-table">
 			<tr valign="top">
-				<th scope="row"><label for="length">
-				<?php _e( "Excerpt Length:", 'advanced-excerpt' ); ?></label></th>
-				<td>
-					<input name="length" type="text" id="length" value="<?php echo $length; ?>" size="2"/>
-					<label for="use-words">
-					<input name="use_words" type="checkbox" id="use-words" value="on"<?php echo ( 1 == $use_words ) ? ' checked="checked"' : ''; ?> />
-					<?php _e( "Use words?", 'advanced-excerpt' ); ?>
+				<th scope="row">
+					<label for="length">
+					<?php _e( "Excerpt Length:", 'advanced-excerpt' ); ?>
 					</label>
-				</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row"><label for="ellipsis">
-				<?php _e( "Ellipsis:", 'advanced-excerpt' ); ?></label></th>
+				</th>
 				<td>
-					<input name="ellipsis" type="text" id="ellipsis" value="<?php echo $ellipsis; ?>" size="5" />
-					<?php printf( __( '(use <a href="%s" target="_blank">HTML entities</a>)', 'advanced-excerpt' ), 'http://entitycode.com' ); ?>
-					<br />
-					<?php _e( "Will substitute the part of the post that is omitted in the excerpt.", 'advanced-excerpt' ); ?>
+					<input name="length" type="text" id="length" value="<?php echo $length; ?>" size="2" />
 				</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row">
-					<label>
-					<?php _e( "Finish:", 'advanced-excerpt' ); ?>
+					<?php _e( "Excerpt Length Type:", 'advanced-excerpt' ); ?>
+				</th>
+				<td>
+					<p>
+						<label for="excerpt-length-type-characters">
+						<input type="radio" id="excerpt-length-type-characters" name="length_type" value="characters"<?php echo ( 'characters' == $length_type ) ? ' checked="checked"' : ''; ?> />
+						<?php _e( "Characters", 'advanced-excerpt' ); ?>
+						</label><br />
+						<label for="excerpt-length-type-words">
+						<input type="radio" id="excerpt-length-type-words" name="length_type" value="words"<?php echo ( 'words' == $length_type ) ? ' checked="checked"' : ''; ?> />
+						<?php _e( "Words", 'advanced-excerpt' ); ?>
+						</label>
+					</p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">
+					<label for="ellipsis">
+					<?php _e( "Ellipsis:", 'advanced-excerpt' ); ?>
 					</label>
 				</th>
 				<td>
-					<label for="finish-word">
-					<input name="finish_word" type="checkbox" id="finish-word" value="on"<?php echo ( 1 == $finish_word ) ? ' checked="checked"' : ''; ?> />
-					<?php _e( "Word", 'advanced-excerpt' ); ?><br/>
-					</label>
+					<p>
+						<input name="ellipsis" type="text" id="ellipsis" value="<?php echo $ellipsis; ?>" size="5" />
+						<?php printf( __( '(use <a href="%s" target="_blank">HTML entities</a>)', 'advanced-excerpt' ), 'http://entitycode.com' ); ?>
+					</p>
+					<p><?php _e( "Will substitute the part of the post that is omitted in the excerpt.", 'advanced-excerpt' ); ?></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">
+					<?php _e( "Finish:", 'advanced-excerpt' ); ?>
+				</th>
+				<td>
+					<p>
+						<label for="finish-none">
+						<input type="radio" id="finish-none" name="finish" value="none"<?php echo ( 'none' == $finish ) ? ' checked="checked"' : ''; ?> />
+						<?php _e( "None", 'advanced-excerpt' ); ?>
+						</label><br />
+						<label for="finish-word">
+						<input type="radio" id="finish-word" name="finish" value="word"<?php echo ( 'word' == $finish ) ? ' checked="checked"' : ''; ?> />
+						<?php _e( "Word", 'advanced-excerpt' ); ?>
+						</label><br />
+						<label for="finish-sentence">
+						<input type="radio" id="finish-sentence" name="finish" value="sentence"<?php echo ( 'sentence' == $finish ) ? ' checked="checked"' : ''; ?> />
+						<?php _e( "Sentence", 'advanced-excerpt' ); ?>
+						</label>
+					</p>
 
-					<label for="finish-sentence">
-					<input name="finish_sentence" type="checkbox" id="finish-sentence" value="on"<?php echo ( 1 == $finish_sentence ) ? ' checked="checked"' : ''; ?> />
-					<?php _e( "Sentence", 'advanced-excerpt' ); ?>
-					</label>
-
-					<br />
-					<?php _e( "Prevents cutting a word or sentence at the end of an excerpt. This option can result in (slightly) longer excerpts.", 'advanced-excerpt' ); ?>
+					<p><?php _e( "Prevents cutting a word or sentence at the end of an excerpt. This option can result in (slightly) longer excerpts.", 'advanced-excerpt' ); ?></p>
 				</td>
 			</tr>
 			<tr valign="top">

@@ -9,11 +9,10 @@ class Advanced_Excerpt {
 	 */ 
 	public $default_options = array(
 		'length' => 40,
-		'use_words' => 1,
+		'length_type' => 'words',
 		'no_custom' => 1,
 		'no_shortcode' => 1,
-		'finish_word' => 0,
-		'finish_sentence' => 0,
+		'finish' => 'none',
 		'ellipsis' => '&hellip;',
 		'read_more' => 'Read the rest',
 		'add_link' => 0,
@@ -80,6 +79,23 @@ class Advanced_Excerpt {
 				$options[$legacy_option] = get_option( $option_name );
 				delete_option( $option_name );
 			}
+
+			// convert legacy options: use_words, finish_word & finish_sentence to their udpated equivalents
+			$options['length_type'] = ( 1 == $options['use_words'] ) ? 'words' : 'characters';
+
+			if ( 0 == $options['finish_word'] && 0 == $options['finish_sentence'] ) {
+				$options['finish'] = 'none';
+			} else if ( 1 == $options['finish_word'] && 1 == $options['finish_sentence'] ) {
+				$options['finish'] = 'sentence';
+			} else if ( 0 == $options['finish_word'] && 1 == $options['finish_sentence'] ) {
+				$options['finish'] = 'sentence';
+			} else {
+				$options['finish'] = 'word';
+			}
+
+			unset( $options['use_words'] );
+			unset( $options['finish_word'] );
+			unset( $options['finish_sentence'] );
 
 			update_option( 'advanced_excerpt', $options );
 			$this->options = $options;
@@ -161,7 +177,7 @@ class Advanced_Excerpt {
 		}
 
 		// Create the excerpt
-		$text = $this->text_excerpt( $text, $length, $use_words, $finish_word, $finish_sentence );
+		$text = $this->text_excerpt( $text, $length, $length_type, $finish );
 
 		// Add the ellipsis or link
 		$text = $this->text_add_more( $text, $ellipsis, ( $add_link ) ? $read_more : false );
@@ -169,7 +185,7 @@ class Advanced_Excerpt {
 		return $text;
 	}
 
-	function text_excerpt( $text, $length, $use_words, $finish_word, $finish_sentence ) {
+	function text_excerpt( $text, $length, $length_type, $finish ) {
 		$tokens = array();
 		$out = '';
 		$w = 0;
@@ -178,21 +194,21 @@ class Advanced_Excerpt {
 		// (<[^>]+>|[^<>\s]+\s*)
 		preg_match_all( '/(<[^>]+>|[^<>\s]+)\s*/u', $text, $tokens );
 		foreach ( $tokens[0] as $t ) { // Parse each token
-			if ( $w >= $length && !$finish_sentence ) { // Limit reached
+			if ( $w >= $length && 'sentence' != $finish ) { // Limit reached
 				break;
 			}
 			if ( $t[0] != '<' ) { // Token is not a tag
-				if ( $w >= $length && $finish_sentence && preg_match( '/[\?\.\!]\s*$/uS', $t ) == 1 ) { // Limit reached, continue until ? . or ! occur at the end
+				if ( $w >= $length && 'sentence' == $finish && preg_match( '/[\?\.\!]\s*$/uS', $t ) == 1 ) { // Limit reached, continue until ? . or ! occur at the end
 					$out .= trim( $t );
 					break;
 				}
-				if ( 1 == $use_words ) { // Count words
+				if ( 'words' == $length_type ) { // Count words
 					$w++;
 				} else { // Count/trim characters
 					$chars = trim( $t ); // Remove surrounding space
 					$c = strlen( $chars );
-					if ( $c + $w > $length && !$finish_sentence ) { // Token is too long
-						$c = ( $finish_word ) ? $c : $length - $w; // Keep token to finish word
+					if ( $c + $w > $length && 'sentence' != $finish ) { // Token is too long
+						$c = ( 'word' == $finish ) ? $c : $length - $w; // Keep token to finish word
 						$t = substr( $t, 0, $c );
 					}
 					$w += $c;
@@ -227,12 +243,14 @@ class Advanced_Excerpt {
 		$_POST = stripslashes_deep( $_POST );
 		$this->options['length'] = (int) $_POST['length'];
 
-		$checkbox_options = array( 'use_words', 'no_custom', 'no_shortcode', 'finish_word', 'finish_sentence', 'add_link' );
+		$checkbox_options = array( 'no_custom', 'no_shortcode', 'add_link' );
 
 		foreach ( $checkbox_options as $checkbox_option ) {
 			$this->options[$checkbox_option] = ( isset( $_POST[$checkbox_option] ) ) ? 1 : 0;
 		}
 
+		$this->options['length_type'] = $_POST['length_type'];
+		$this->options['finish'] = $_POST['finish'];
 		$this->options['ellipsis'] = $_POST['ellipsis'];
 		$this->options['read_more'] = $_POST['read_more'];
 		$this->options['allowed_tags'] = ( isset( $_POST['allowed_tags'] ) ) ? array_unique( (array) $_POST['allowed_tags'] ) : array();
