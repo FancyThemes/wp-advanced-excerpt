@@ -11,23 +11,10 @@
 				</th>
 				<td>
 					<input name="length" type="text" id="length" value="<?php echo $length; ?>" size="2" />
-				</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">
-					<?php _e( "Excerpt Length Type:", 'advanced-excerpt' ); ?>
-				</th>
-				<td>
-					<p>
-						<label for="excerpt-length-type-characters">
-						<input type="radio" id="excerpt-length-type-characters" name="length_type" value="characters"<?php echo ( 'characters' == $length_type ) ? ' checked="checked"' : ''; ?> />
-						<?php _e( "Characters", 'advanced-excerpt' ); ?>
-						</label><br />
-						<label for="excerpt-length-type-words">
-						<input type="radio" id="excerpt-length-type-words" name="length_type" value="words"<?php echo ( 'words' == $length_type ) ? ' checked="checked"' : ''; ?> />
-						<?php _e( "Words", 'advanced-excerpt' ); ?>
-						</label>
-					</p>
+					<select name="length_type">
+						<option value="characters"<?php echo ( 'characters' == $length_type ) ? ' selected="selected"' : ''; ?>><?php _e( "Characters", 'advanced-excerpt' ); ?></option>
+						<option value="words"<?php echo ( 'words' == $length_type ) ? ' selected="selected"' : ''; ?>><?php _e( "Words", 'advanced-excerpt' ); ?></option>
+					</select> 
 				</td>
 			</tr>
 			<tr valign="top">
