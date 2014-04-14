@@ -122,7 +122,7 @@ class Advanced_Excerpt {
 		 * e.g. array( 'search', 'author' );
 		 */
 		$page_types = $this->get_current_page_types();
-		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', array() );
+		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', array( 'feed', 'comment_feed' ) ); // exclude feeds by default
 		$page_type_matches = array_intersect( $page_types, $skip_page_types );
 		if ( !empty( $page_types ) && !empty( $page_type_matches ) ) return $text;
 
