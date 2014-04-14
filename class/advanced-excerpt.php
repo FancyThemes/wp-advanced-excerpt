@@ -59,6 +59,7 @@ class Advanced_Excerpt {
 
 		remove_all_filters( 'get_the_excerpt' );
 		add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
+		add_filter( 'the_content', array( $this, 'filter' ) );
 	}
 
 	function admin_init() {
@@ -109,6 +110,13 @@ class Advanced_Excerpt {
 
 	function filter( $text ) {
 		/*
+		 * WordPress default themes (and others) do not use the_excerpt() or get_the_excerpt()
+		 * instead they use the_content(). As such, we also need to hook into the_content().
+		 * To ensure we're not changing the content of posts / pages we first check if is_singular().
+		 */
+		if ( is_singular() ) return $text;
+
+		/*
 		 * Allow developers to skip running the advanced excerpt filters on certain page types.
 		 * They can do so by passing in an array of page types they'd like to skip
 		 * e.g. array( 'search', 'author' );
@@ -135,7 +143,10 @@ class Advanced_Excerpt {
 		if ( 1 == $no_shortcode ) {
 			$text = strip_shortcodes( $text );
 		}
+
+		remove_filter( 'the_content', array( $this, 'filter' ) ); // prevent recursion
 		$text = apply_filters( 'the_content', $text );
+		add_filter( 'the_content', array( $this, 'filter' ) ); // add our filter back in
 
 		// From the default wp_trim_excerpt():
 		// Some kind of precaution against malformed CDATA in RSS feeds I suppose
