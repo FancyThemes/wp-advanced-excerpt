@@ -31,6 +31,7 @@ class Advanced_Excerpt {
 		$this->plugin_dir_path = plugin_dir_path( $plugin_file_path );
 		$this->plugin_folder_name = basename( $this->plugin_dir_path );
 		$this->plugin_basename = plugin_basename( $plugin_file_path );
+		$this->plugin_base ='options-general.php?page=advanced-excerpt';
 
 		$this->options_basic_tags = apply_filters( 'advanced_excerpt_basic_tags', array(
 			'a', 'abbr', 'acronym', 'b', 'big',
@@ -64,6 +65,7 @@ class Advanced_Excerpt {
 
 	function admin_init() {
 		add_action( 'admin_menu', array( $this, 'add_pages' ) );
+		add_filter( 'plugin_action_links_' . $this->plugin_basename, array( $this, 'plugin_action_links' ) );
 	}
 
 	function load_options() {
@@ -106,6 +108,12 @@ class Advanced_Excerpt {
 		$plugins_url = trailingslashit( plugins_url() ) . trailingslashit( $this->plugin_folder_name );
 		$src = $plugins_url . 'assets/js/advanced-excerpt.js';
 		wp_enqueue_script( 'advanced-excerpt-script', $src, array( 'jquery' ), $version, true );
+	}
+
+	function plugin_action_links( $links ) {
+		$link = sprintf( '<a href="%s">%s</a>', admin_url( $this->plugin_base ), __( 'Settings', 'advanced-excerpt' ) );
+		array_unshift( $links, $link );
+		return $links;
 	}
 
 	function filter( $text ) {
