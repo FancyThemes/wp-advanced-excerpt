@@ -121,12 +121,18 @@ class Advanced_Excerpt {
 	function add_pages() {
 		$options_page = add_options_page( __( "Advanced Excerpt Options", 'advanced-excerpt' ), __( "Excerpt", 'advanced-excerpt' ), 'manage_options', 'advanced-excerpt', array( $this, 'page_options' ) );
 		// Scripts
-		add_action( 'admin_print_scripts-' . $options_page, array( $this, 'page_script' ) );
+		add_action( 'admin_print_scripts-' . $options_page, array( $this, 'page_assets' ) );
 	}
 
-	function page_script() {
+	function page_assets() {
 		$version = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? time() : $this->plugin_version;
 		$plugins_url = trailingslashit( plugins_url() ) . trailingslashit( $this->plugin_folder_name );
+
+		// css
+		$src = $plugins_url . 'assets/css/styles.css';
+		wp_enqueue_style( 'advanced-excerpt-styles', $src, array(), $version );
+
+		// js
 		$src = $plugins_url . 'assets/js/advanced-excerpt.js';
 		wp_enqueue_script( 'advanced-excerpt-script', $src, array( 'jquery' ), $version, true );
 	}

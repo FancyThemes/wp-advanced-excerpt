@@ -1,4 +1,4 @@
-<div class="wrap">
+<div class="wrap advanced-excerpt">
 	<h2><?php _e( "Advanced Excerpt Options", 'advanced-excerpt' ); ?></h2>
 	<form method="post" action="">
 	<?php if ( function_exists( 'wp_nonce_field' ) ) wp_nonce_field( 'advanced_excerpt_update_options' ); ?>
