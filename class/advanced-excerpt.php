@@ -123,12 +123,7 @@ class Advanced_Excerpt {
 		$page_type_matches = array_intersect( $page_types, $skip_page_types );
 		if ( !empty( $page_types ) && !empty( $page_type_matches ) ) return $text;
 
-		// Extract options (skip collisions)
-		if ( is_array( $this->options ) ) {
-			extract( $this->options, EXTR_SKIP );
-			$this->options = null; // Reset
-		}
-		extract( $this->default_options, EXTR_SKIP );
+		extract( wp_parse_args( $this->options, $this->default_options ), EXTR_SKIP );
 
 		// Avoid custom excerpts
 		if ( !empty( $text ) && !$no_custom ) {
