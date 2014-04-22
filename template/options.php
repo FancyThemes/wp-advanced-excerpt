@@ -38,8 +38,8 @@
 				<td>
 					<p>
 						<label for="finish-none">
-						<input type="radio" id="finish-none" name="finish" value="none"<?php echo ( 'none' == $finish ) ? ' checked="checked"' : ''; ?> />
-						<?php _e( "None", 'advanced-excerpt' ); ?>
+						<input type="radio" id="finish-none" name="finish" value="exact"<?php echo ( 'exact' == $finish ) ? ' checked="checked"' : ''; ?> />
+						<?php _e( "Exact", 'advanced-excerpt' ); ?>
 						</label><br />
 						<label for="finish-word">
 						<input type="radio" id="finish-word" name="finish" value="word"<?php echo ( 'word' == $finish ) ? ' checked="checked"' : ''; ?> />

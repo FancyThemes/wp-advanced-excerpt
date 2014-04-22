@@ -12,7 +12,7 @@ class Advanced_Excerpt {
 		'length_type' => 'words',
 		'no_custom' => 1,
 		'no_shortcode' => 1,
-		'finish' => 'none',
+		'finish' => 'exact',
 		'ellipsis' => '&hellip;',
 		'read_more' => 'Read the rest',
 		'add_link' => 0,
@@ -94,7 +94,7 @@ class Advanced_Excerpt {
 		// convert legacy options finish_word & finish_sentence to their udpated equivalents
 		if ( isset( $this->options['finish_sentence'] ) ) {
 			if ( 0 == $this->options['finish_word'] && 0 == $this->options['finish_sentence'] ) {
-				$this->options['finish'] = 'none';
+				$this->options['finish'] = 'exact';
 			} else if ( 1 == $this->options['finish_word'] && 1 == $this->options['finish_sentence'] ) {
 				$this->options['finish'] = 'sentence';
 			} else if ( 0 == $this->options['finish_word'] && 1 == $this->options['finish_sentence'] ) {
