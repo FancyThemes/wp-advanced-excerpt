@@ -132,11 +132,11 @@ class Advanced_Excerpt {
 		$plugins_url = trailingslashit( plugins_url() ) . trailingslashit( $this->plugin_folder_name );
 
 		// css
-		$src = $plugins_url . 'assets/css/styles.css';
+		$src = $plugins_url . 'asset/css/styles.css';
 		wp_enqueue_style( 'advanced-excerpt-styles', $src, array(), $version );
 
 		// js
-		$src = $plugins_url . 'assets/js/advanced-excerpt.js';
+		$src = $plugins_url . 'asset/js/advanced-excerpt.js';
 		wp_enqueue_script( 'advanced-excerpt-script', $src, array( 'jquery' ), $version, true );
 	}
 
