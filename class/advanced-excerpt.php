@@ -33,24 +33,24 @@ class Advanced_Excerpt {
 		$this->plugin_base ='options-general.php?page=advanced-excerpt';
 
 		$this->options_basic_tags = apply_filters( 'advanced_excerpt_basic_tags', array(
-			'a', 'abbr', 'acronym', 'b', 'big',
-			'blockquote', 'br', 'center', 'cite', 'code', 'dd', 'del', 'div', 'dl', 'dt',
-			'em', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img', 'ins',
-			'li', 'ol', 'p', 'pre', 'q', 's', 'small', 'span', 'strike', 'strong', 'sub',
-			'sup', 'table', 'td', 'th', 'tr', 'u', 'ul'
+			'a', 'abbr', 'acronym', 'address', 'article', 'aside', 'audio', 'b', 'big',
+			'blockquote', 'br', 'canvas', 'center', 'cite', 'code', 'dd', 'del', 'div', 'dl', 'dt',
+			'em', 'embed', 'form', 'footer', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hr', 'i', 'img', 'ins',
+			'li', 'nav', 'ol', 'p', 'pre', 'q', 's', 'section', 'small', 'span', 'strike', 'strong', 'sub',
+			'sup', 'svg', 'table', 'td', 'template', 'th', 'time', 'tr', 'u', 'ul', 'video'
 		) );
 
 		$this->options_all_tags = apply_filters( 'advanced_excerpt_all_tags', array(
 			'a', 'abbr', 'acronym', 'address', 'applet',
-			'area', 'b', 'bdo', 'big', 'blockquote', 'br', 'button', 'caption', 'center',
-			'cite', 'code', 'col', 'colgroup', 'dd', 'del', 'dfn', 'dir', 'div', 'dl',
-			'dt', 'em', 'fieldset', 'font', 'form', 'frame', 'frameset', 'h1', 'h2', 'h3',
-			'h4', 'h5', 'h6', 'hr', 'i', 'iframe', 'img', 'input', 'ins', 'isindex', 'kbd',
-			'label', 'legend', 'li', 'map', 'menu', 'noframes', 'noscript', 'object',
-			'ol', 'optgroup', 'option', 'p', 'param', 'pre', 'q', 's', 'samp', 'script',
-			'select', 'small', 'span', 'strike', 'strong', 'style', 'sub', 'sup', 'table',
-			'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'tt', 'u', 'ul',
-			'var'
+			'area', 'b', 'bdi', 'bdo', 'big', 'blockquote', 'br', 'button', 'caption', 'center',
+			'cite', 'code', 'col', 'colgroup', 'data', 'datalist', 'dd', 'del', 'details', 'dfn', 'dir', 'div', 'dl',
+			'dt', 'em', 'fieldset', 'figcaption', 'figure', 'font', 'form', 'frame', 'frameset', 'h1', 'h2', 'h3',
+			'h4', 'h5', 'h6', 'hr', 'i', 'iframe', 'img', 'input', 'ins', 'isindex', 'kbd', 'keygen',
+			'label', 'legend', 'li', 'map', 'mark', 'main', 'math', 'menu', 'menuitem', 'meter', 'noframes', 'noscript', 'object',
+			'ol', 'optgroup', 'option', 'output', 'p', 'param', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'script',
+			'select', 'small', 'source', 'span', 'strike', 'strong', 'style', 'sub', 'summary', 'sup', 'table',
+			'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'track', 'tt', 'u', 'ul',
+			'var', 'wbr'
 		) );
 
 		if ( is_admin() ) {
