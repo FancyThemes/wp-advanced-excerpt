@@ -19,6 +19,37 @@ function the_advanced_excerpt( $args = '', $get = false ) {
 			$args['exclude_tags'] = preg_split( '/[\s,]+/', $args['exclude_tags'] );
 		}
 	}
+
+	// convert legacy arg use_words to it's udpated equivalent
+	if ( isset( $args['use_words'] ) ) {
+		$args['length_type'] = ( 1 == $args['use_words'] ) ? 'words' : 'characters';
+		unset( $args['use_words'] );
+	}
+
+	// convert legacy args finish_word & finish_sentence to their udpated equivalents
+	if ( isset( $args['finish_word'] ) || isset( $args['finish_sentence'] ) ) {
+
+		$defaults = array(
+			'finish_word' => 0,
+			'finish_sentence' => 0
+		);
+
+		$args = wp_parse_args( $args, $defaults );
+
+		if ( 0 == $args['finish_word'] && 0 == $args['finish_sentence'] ) {
+			$args['finish'] = 'none';
+		} else if ( 1 == $args['finish_word'] && 1 == $args['finish_sentence'] ) {
+			$args['finish'] = 'sentence';
+		} else if ( 0 == $args['finish_word'] && 1 == $args['finish_sentence'] ) {
+			$args['finish'] = 'sentence';
+		} else {
+			$args['finish'] = 'word';
+		}
+
+		unset( $args['finish_word'] );
+		unset( $args['finish_sentence'] );
+	}
+
 	// Set temporary options
 	$advanced_excerpt->options = $args;
 

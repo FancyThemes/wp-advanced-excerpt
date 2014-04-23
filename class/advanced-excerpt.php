@@ -9,11 +9,10 @@ class Advanced_Excerpt {
 	 */ 
 	public $default_options = array(
 		'length' => 40,
-		'use_words' => 1,
+		'length_type' => 'words',
 		'no_custom' => 1,
 		'no_shortcode' => 1,
-		'finish_word' => 0,
-		'finish_sentence' => 0,
+		'finish' => 'exact',
 		'ellipsis' => '&hellip;',
 		'read_more' => 'Read the rest',
 		'add_link' => 0,
@@ -74,25 +73,50 @@ class Advanced_Excerpt {
 		 * The code below checks if their installations once used an older version of this plugin and attempts to update
 		 * the option storage to the new method (all options stored in a single row in the DB as an array)
 		*/
+		$update_options = false;
 		if ( false !== get_option( 'advancedexcerpt_length' ) ) {
 			$legacy_options = array( 'length', 'use_words', 'no_custom', 'no_shortcode', 'finish_word', 'finish_sentence', 'ellipsis', 'read_more', 'add_link', 'allowed_tags' );
-		
-			$options = array();
+
 			foreach ( $legacy_options as $legacy_option ) {
 				$option_name = 'advancedexcerpt_' . $legacy_option;
-				$options[$legacy_option] = get_option( $option_name );
+				$this->options[$legacy_option] = get_option( $option_name );
 				delete_option( $option_name );
 			}
-
-			update_option( 'advanced_excerpt', $options );
-			$this->options = $options;
+			$update_options = true;
 		} else {
 			$this->options = get_option( 'advanced_excerpt' );
+		}
+
+		// convert legacy option use_words to it's udpated equivalent
+		if ( isset( $this->options['use_words'] ) ) {
+			$this->options['length_type'] = ( 1 == $this->options['use_words'] ) ? 'words' : 'characters';
+			unset( $this->options['use_words'] );
+			$update_options = true;
+		}
+
+		// convert legacy options finish_word & finish_sentence to their udpated equivalents
+		if ( isset( $this->options['finish_sentence'] ) ) {
+			if ( 0 == $this->options['finish_word'] && 0 == $this->options['finish_sentence'] ) {
+				$this->options['finish'] = 'exact';
+			} else if ( 1 == $this->options['finish_word'] && 1 == $this->options['finish_sentence'] ) {
+				$this->options['finish'] = 'sentence';
+			} else if ( 0 == $this->options['finish_word'] && 1 == $this->options['finish_sentence'] ) {
+				$this->options['finish'] = 'sentence';
+			} else {
+				$this->options['finish'] = 'word';
+			}
+			unset( $this->options['finish_word'] );
+			unset( $this->options['finish_sentence'] );
+			$update_options = true;
 		}
 
 		// if no options exist then this is a fresh install, set up some default options
 		if ( empty( $this->options ) ) {
 			$this->options = $this->default_options;
+			$update_options = true;
+		}
+
+		if ( $update_options ) {
 			update_option( 'advanced_excerpt', $this->options );
 		}
 	}
@@ -100,12 +124,18 @@ class Advanced_Excerpt {
 	function add_pages() {
 		$options_page = add_options_page( __( "Advanced Excerpt Options", 'advanced-excerpt' ), __( "Excerpt", 'advanced-excerpt' ), 'manage_options', 'advanced-excerpt', array( $this, 'page_options' ) );
 		// Scripts
-		add_action( 'admin_print_scripts-' . $options_page, array( $this, 'page_script' ) );
+		add_action( 'admin_print_scripts-' . $options_page, array( $this, 'page_assets' ) );
 	}
 
-	function page_script() {
+	function page_assets() {
 		$version = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? time() : $this->plugin_version;
 		$plugins_url = trailingslashit( plugins_url() ) . trailingslashit( $this->plugin_folder_name );
+
+		// css
+		$src = $plugins_url . 'assets/css/styles.css';
+		wp_enqueue_style( 'advanced-excerpt-styles', $src, array(), $version );
+
+		// js
 		$src = $plugins_url . 'assets/js/advanced-excerpt.js';
 		wp_enqueue_script( 'advanced-excerpt-script', $src, array( 'jquery' ), $version, true );
 	}
@@ -172,7 +202,7 @@ class Advanced_Excerpt {
 		}
 
 		// Create the excerpt
-		$text = $this->text_excerpt( $text, $length, $use_words, $finish_word, $finish_sentence );
+		$text = $this->text_excerpt( $text, $length, $length_type, $finish );
 
 		// Add the ellipsis or link
 		$text = $this->text_add_more( $text, $ellipsis, ( $add_link ) ? $read_more : false );
@@ -180,7 +210,7 @@ class Advanced_Excerpt {
 		return $text;
 	}
 
-	function text_excerpt( $text, $length, $use_words, $finish_word, $finish_sentence ) {
+	function text_excerpt( $text, $length, $length_type, $finish ) {
 		$tokens = array();
 		$out = '';
 		$w = 0;
@@ -189,21 +219,21 @@ class Advanced_Excerpt {
 		// (<[^>]+>|[^<>\s]+\s*)
 		preg_match_all( '/(<[^>]+>|[^<>\s]+)\s*/u', $text, $tokens );
 		foreach ( $tokens[0] as $t ) { // Parse each token
-			if ( $w >= $length && !$finish_sentence ) { // Limit reached
+			if ( $w >= $length && 'sentence' != $finish ) { // Limit reached
 				break;
 			}
 			if ( $t[0] != '<' ) { // Token is not a tag
-				if ( $w >= $length && $finish_sentence && preg_match( '/[\?\.\!]\s*$/uS', $t ) == 1 ) { // Limit reached, continue until ? . or ! occur at the end
+				if ( $w >= $length && 'sentence' == $finish && preg_match( '/[\?\.\!]\s*$/uS', $t ) == 1 ) { // Limit reached, continue until ? . or ! occur at the end
 					$out .= trim( $t );
 					break;
 				}
-				if ( 1 == $use_words ) { // Count words
+				if ( 'words' == $length_type ) { // Count words
 					$w++;
 				} else { // Count/trim characters
 					$chars = trim( $t ); // Remove surrounding space
 					$c = strlen( $chars );
-					if ( $c + $w > $length && !$finish_sentence ) { // Token is too long
-						$c = ( $finish_word ) ? $c : $length - $w; // Keep token to finish word
+					if ( $c + $w > $length && 'sentence' != $finish ) { // Token is too long
+						$c = ( 'word' == $finish ) ? $c : $length - $w; // Keep token to finish word
 						$t = substr( $t, 0, $c );
 					}
 					$w += $c;
@@ -238,12 +268,14 @@ class Advanced_Excerpt {
 		$_POST = stripslashes_deep( $_POST );
 		$this->options['length'] = (int) $_POST['length'];
 
-		$checkbox_options = array( 'use_words', 'no_custom', 'no_shortcode', 'finish_word', 'finish_sentence', 'add_link' );
+		$checkbox_options = array( 'no_custom', 'no_shortcode', 'add_link' );
 
 		foreach ( $checkbox_options as $checkbox_option ) {
 			$this->options[$checkbox_option] = ( isset( $_POST[$checkbox_option] ) ) ? 1 : 0;
 		}
 
+		$this->options['length_type'] = $_POST['length_type'];
+		$this->options['finish'] = $_POST['finish'];
 		$this->options['ellipsis'] = $_POST['ellipsis'];
 		$this->options['read_more'] = $_POST['read_more'];
 		$this->options['allowed_tags'] = ( isset( $_POST['allowed_tags'] ) ) ? array_unique( (array) $_POST['allowed_tags'] ) : array();
