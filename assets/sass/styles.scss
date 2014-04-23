@@ -2,7 +2,12 @@
 
 .advanced-excerpt {
 
+	#length {
+		vertical-align: inherit;
+	}
+
 	#tags-table {
+		border-collapse: collapse;
 		td {
 			padding: 0px 20px 30px 0px;
 		}
