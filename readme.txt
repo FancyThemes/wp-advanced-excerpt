@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: excerpt, post, content, formatting
 Requires at least: 3.2
 Tested up to: 3.9
-Stable tag: 4.1.1
+Stable tag: 4.2
 License: GPLv3
 
 Control the appearance of WordPress post excerpts
