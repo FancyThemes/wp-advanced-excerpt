@@ -41,16 +41,11 @@ class Advanced_Excerpt {
 		) );
 
 		$this->options_all_tags = apply_filters( 'advanced_excerpt_all_tags', array(
-			'a', 'abbr', 'acronym', 'address', 'applet',
-			'area', 'b', 'bdi', 'bdo', 'big', 'blockquote', 'br', 'button', 'caption', 'center',
-			'cite', 'code', 'col', 'colgroup', 'data', 'datalist', 'dd', 'del', 'details', 'dfn', 'dir', 'div', 'dl',
-			'dt', 'em', 'fieldset', 'figcaption', 'figure', 'font', 'form', 'frame', 'frameset', 'h1', 'h2', 'h3',
-			'h4', 'h5', 'h6', 'hr', 'i', 'iframe', 'img', 'input', 'ins', 'isindex', 'kbd', 'keygen',
-			'label', 'legend', 'li', 'map', 'mark', 'main', 'math', 'menu', 'menuitem', 'meter', 'noframes', 'noscript', 'object',
-			'ol', 'optgroup', 'option', 'output', 'p', 'param', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'script',
-			'select', 'small', 'source', 'span', 'strike', 'strong', 'style', 'sub', 'summary', 'sup', 'table',
-			'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'track', 'tt', 'u', 'ul',
-			'var', 'wbr'
+			'applet', 'area', 'bdi', 'bdo', 'button', 'caption', 'col', 'colgroup', 'data', 'datalist', 'details', 
+			'dfn', 'dir', 'fieldset', 'figcaption', 'figure', 'font', 'frame', 'frameset', 'iframe', 'input', 'isindex', 
+			'kbd', 'keygen', 'label', 'legend', 'map', 'mark', 'main', 'math', 'menu', 'menuitem', 'meter', 'noframes', 
+			'noscript', 'object', 'optgroup', 'option', 'output', 'param', 'progress', 'rp', 'rt', 'ruby', 'samp', 
+			'script', 'select', 'source', 'style', 'summary', 'tbody', 'textarea', 'tfoot', 'thead', 'track', 'tt', 'var', 'wbr'
 		) );
 
 		if ( is_admin() ) {
