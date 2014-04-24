@@ -157,7 +157,7 @@ class Advanced_Excerpt {
 		 * To ensure we're not changing the content of posts / pages we first check if is_singular().
 		 */
 		$page_types = $this->get_current_page_types();
-		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', array( 'singular', 'feed', 'comment_feed' ) ); // exclude feeds by default
+		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', array( 'singular' ) ); // exclude feeds by default
 		$page_type_matches = array_intersect( $page_types, $skip_page_types );
 		if ( !empty( $page_types ) && !empty( $page_type_matches ) ) return $text;
 
