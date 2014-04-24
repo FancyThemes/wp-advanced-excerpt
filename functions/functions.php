@@ -37,7 +37,7 @@ function the_advanced_excerpt( $args = '', $get = false ) {
 		$args = wp_parse_args( $args, $defaults );
 
 		if ( 0 == $args['finish_word'] && 0 == $args['finish_sentence'] ) {
-			$args['finish'] = 'none';
+			$args['finish'] = 'exact';
 		} else if ( 1 == $args['finish_word'] && 1 == $args['finish_sentence'] ) {
 			$args['finish'] = 'sentence';
 		} else if ( 0 == $args['finish_word'] && 1 == $args['finish_sentence'] ) {
