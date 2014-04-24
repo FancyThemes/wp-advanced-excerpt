@@ -134,7 +134,7 @@
 					<a href="" id="select-all"><?php _e( "Select all", 'advanced-excerpt' ); ?></a> / <a href="" id="select-none"><?php _e( "Select none", 'advanced-excerpt' ); ?></a><br />
 					<?php _e( "More tags", 'advanced-excerpt' ); ?>
 					<select name="more_tags" id="more-tags">
-					<?php foreach ( $this->options_all_tags as $tag ) : ?>
+					<?php foreach ( array_diff( $this->options_all_tags, $this->options_basic_tags ) as $tag ) : ?>
 						<option value="<?php echo $tag; ?>"><?php echo $tag; ?></option>
 					<?php endforeach; ?>
 					</select>
