@@ -270,15 +270,26 @@ class Advanced_Excerpt {
 			$ellipsis .= sprintf( $link_template, get_permalink(), $read_more );
 		}
 
-		$pos = strrpos( $text, '</' );
+		$pos = strrpos( $text, '</' );	
+
 		if ( $pos !== false ) {
+			// get the "clean" name of the last closing tag in the text, e.g. p, a, strong, div
+			$last_tag = strtolower( trim( str_replace( array( '<', '/', '>' ), '', substr( $text, $pos ) ) ) );
+
+			$allow_tags_to_append_into = apply_filters( 'advanced_excerpt_allow_tags_to_append_into', array( 'p', 'div', 'article', 'section' ) );
+
+			if( !in_array( $last_tag, $allow_tags_to_append_into ) ) {
+				// After the content
+				$text .= $ellipsis;
+				return $text;
+			}
 			// Inside last HTML tag
 			$text = substr_replace( $text, $ellipsis, $pos, 0 );
-		} else {
-			// After the content
-			$text .= $ellipsis;
+			return $text;
 		}
 
+		// After the content
+		$text .= $ellipsis;
 		return $text;
 	}
 
