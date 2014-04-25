@@ -7,3 +7,6 @@
 .advanced-excerpt #tags-table td {
   padding: 0px 20px 30px 0px;
 }
+.advanced-excerpt .monospaced {
+  font-family: Consolas,Monaco,monospace;
+}

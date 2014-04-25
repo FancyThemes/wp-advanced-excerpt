@@ -16,7 +16,9 @@ class Advanced_Excerpt {
 		'ellipsis' => '&hellip;',
 		'read_more' => 'Read the rest',
 		'add_link' => 0,
-		'allowed_tags' => array( '_all' )
+		'allowed_tags' => array( '_all' ),
+		'the_excerpt' => 1,
+		'the_content' => 1,
 	);
 
 	public $options_basic_tags; // Basic HTML tags (determines which tags are in the checklist by default)
@@ -57,9 +59,14 @@ class Advanced_Excerpt {
 			$this->admin_init();
 		}
 
-		remove_all_filters( 'get_the_excerpt' );
-		add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
-		add_filter( 'the_content', array( $this, 'filter' ) );
+		if( 1 == $this->options['the_excerpt'] ) {
+			remove_all_filters( 'get_the_excerpt' );
+			add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
+		}
+
+		if( 1 == $this->options['the_content'] ) {
+			add_filter( 'the_content', array( $this, 'filter' ) );
+		}
 	}
 
 	function admin_init() {
@@ -82,6 +89,11 @@ class Advanced_Excerpt {
 				$this->options[$legacy_option] = get_option( $option_name );
 				delete_option( $option_name );
 			}
+
+			// filtering the_content() is disabled by default when migrating from version 4.1.1 of the plugin
+			$this->options['the_excerpt'] = 1;
+			$this->options['the_content'] = 0;
+
 			$update_options = true;
 		} else {
 			$this->options = get_option( 'advanced_excerpt' );
@@ -115,6 +127,8 @@ class Advanced_Excerpt {
 			$this->options = $this->default_options;
 			$update_options = true;
 		}
+
+		$this->options = wp_parse_args( $this->options, $this->default_options );
 
 		if ( $update_options ) {
 			update_option( 'advanced_excerpt', $this->options );
@@ -268,7 +282,7 @@ class Advanced_Excerpt {
 		$_POST = stripslashes_deep( $_POST );
 		$this->options['length'] = (int) $_POST['length'];
 
-		$checkbox_options = array( 'no_custom', 'no_shortcode', 'add_link' );
+		$checkbox_options = array( 'no_custom', 'no_shortcode', 'add_link', 'the_excerpt', 'the_content' );
 
 		foreach ( $checkbox_options as $checkbox_option ) {
 			$this->options[$checkbox_option] = ( isset( $_POST[$checkbox_option] ) ) ? 1 : 0;

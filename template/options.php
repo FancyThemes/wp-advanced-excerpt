@@ -95,6 +95,27 @@
 				</td>
 			</tr>
 			<tr valign="top">
+				<th scope="row">
+					<?php _e( "Filter:", 'advanced-excerpt' ); ?>
+				</th>
+				<td>
+					<p>
+						<label for="the-excerpt">
+						<input name="the_excerpt" type="checkbox" id="the-excerpt" value="on" <?php echo ( 1 == $the_excerpt ) ? 'checked="checked"' : ''; ?> />
+						<span class='monospaced'>the_excerpt()</span>
+						</label><br />
+						<label for="the-content">
+						<input name="the_content" type="checkbox" id="the-content" value="on" <?php echo ( 1 == $the_content ) ? 'checked="checked"' : ''; ?> />
+						<span class='monospaced'>the_content()</span>
+						</label>
+					<p>
+
+					<p>
+						<?php _e( 'Themes may use <code>the_excerpt()</code> for some pages (e.g. search results) and <code>the_content()</code> on others (e.g. blog archives).<br />Depending on your theme and what pages you want this plugin to affect, you may need to adjust these settings.' ); ?>
+					</p>
+				</td>
+			</tr>
+			<tr valign="top">
 				<th scope="row"><?php _e( "Keep Markup:", 'advanced-excerpt' ); ?></th>
 				<td>
 					<table id="tags-table">
