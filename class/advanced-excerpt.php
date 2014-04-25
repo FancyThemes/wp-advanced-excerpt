@@ -188,9 +188,13 @@ class Advanced_Excerpt {
 			$text = strip_shortcodes( $text );
 		}
 
-		remove_filter( 'the_content', array( $this, 'filter' ) ); // prevent recursion
+		if( 1 == $this->options['the_content'] ) {
+			remove_filter( 'the_content', array( $this, 'filter' ) ); // prevent recursion
+		}
 		$text = apply_filters( 'the_content', $text );
-		add_filter( 'the_content', array( $this, 'filter' ) ); // add our filter back in
+		if( 1 == $this->options['the_content'] ) {
+			add_filter( 'the_content', array( $this, 'filter' ) ); // add our filter back in
+		}
 
 		// From the default wp_trim_excerpt():
 		// Some kind of precaution against malformed CDATA in RSS feeds I suppose
