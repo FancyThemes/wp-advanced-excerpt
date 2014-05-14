@@ -276,6 +276,10 @@ class Advanced_Excerpt {
 			// get the "clean" name of the last closing tag in the text, e.g. p, a, strong, div
 			$last_tag = strtolower( trim( str_replace( array( '<', '/', '>' ), '', substr( $text, $pos ) ) ) );
 
+			/*
+			 * There was previously a problem where our 'read-more' links were being appending incorrectly into unsuitable HTML tags.
+			 * As such we're now maintaining a whitelist of HTML tags that are suitable for being appended into.
+			 */
 			$allow_tags_to_append_into = apply_filters( 'advanced_excerpt_allow_tags_to_append_into', array( 'p', 'div', 'article', 'section' ) );
 
 			if( !in_array( $last_tag, $allow_tags_to_append_into ) ) {
