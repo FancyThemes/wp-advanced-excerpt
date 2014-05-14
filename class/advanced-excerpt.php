@@ -229,7 +229,7 @@ class Advanced_Excerpt {
 		// Add the ellipsis or link
 		$text = $this->text_add_more( $text, $ellipsis, ( $add_link ) ? $read_more : false );
 
-		return $text;
+		return apply_filters( 'advanced_excerpt_content', $text );
 	}
 
 	function text_excerpt( $text, $length, $length_type, $finish ) {
