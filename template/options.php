@@ -111,7 +111,7 @@
 					<p>
 
 					<p class="description">
-						<?php _e( 'Themes may use <code>the_excerpt()</code> for some pages (e.g. search results) and <code>the_content()</code> on others (e.g. blog archives).<br />Depending on your theme and what pages you want this plugin to affect, you may need to adjust these settings.' ); ?>
+						<?php _e( 'Themes may use <code>the_excerpt()</code> for some pages (e.g. search results) and <code>the_content()</code> on others (e.g. blog archives).<br />Depending on your theme and what pages you want this plugin to affect, you may need to adjust these settings.', 'advanced-excerpt' ); ?>
 					</p>
 				</td>
 			</tr>
