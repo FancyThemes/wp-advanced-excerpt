@@ -28,7 +28,7 @@
 						<input name="ellipsis" type="text" id="ellipsis" value="<?php echo $ellipsis; ?>" size="5" />
 						<?php printf( __( '(use <a href="%s" target="_blank">HTML entities</a>)', 'advanced-excerpt' ), 'http://entitycode.com' ); ?>
 					</p>
-					<p><?php _e( "Will substitute the part of the post that is omitted in the excerpt.", 'advanced-excerpt' ); ?></p>
+					<p class="description"><?php _e( "Will substitute the part of the post that is omitted in the excerpt.", 'advanced-excerpt' ); ?></p>
 				</td>
 			</tr>
 			<tr valign="top">
@@ -51,7 +51,7 @@
 						</label>
 					</p>
 
-					<p><?php _e( "Prevents cutting a word or sentence at the end of an excerpt. This option can result in (slightly) longer excerpts.", 'advanced-excerpt' ); ?></p>
+					<p class="description"><?php _e( "Prevents cutting a word or sentence at the end of an excerpt. This option can result in (slightly) longer excerpts.", 'advanced-excerpt' ); ?></p>
 				</td>
 			</tr>
 			<tr valign="top">
@@ -110,7 +110,7 @@
 						</label>
 					<p>
 
-					<p>
+					<p class="description">
 						<?php _e( 'Themes may use <code>the_excerpt()</code> for some pages (e.g. search results) and <code>the_content()</code> on others (e.g. blog archives).<br />Depending on your theme and what pages you want this plugin to affect, you may need to adjust these settings.' ); ?>
 					</p>
 				</td>
