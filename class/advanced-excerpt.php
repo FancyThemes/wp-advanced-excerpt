@@ -35,6 +35,11 @@ class Advanced_Excerpt {
 		$this->plugin_basename = plugin_basename( $plugin_file_path );
 		$this->plugin_base ='options-general.php?page=advanced-excerpt';
 
+		if ( 'POST' == $_SERVER['REQUEST_METHOD'] && isset( $_REQUEST['page'] ) && 'advanced-excerpt' === $_REQUEST['page'] ) {
+			check_admin_referer( 'advanced_excerpt_update_options' );
+			$this->update_options();
+		}
+
 		$this->options_basic_tags = apply_filters( 'advanced_excerpt_basic_tags', array(
 			'a', 'abbr', 'acronym', 'address', 'article', 'aside', 'audio', 'b', 'big',
 			'blockquote', 'br', 'canvas', 'center', 'cite', 'code', 'dd', 'del', 'div', 'dl', 'dt',
@@ -324,15 +329,11 @@ class Advanced_Excerpt {
 
 		update_option( 'advanced_excerpt', $this->options );
 
-		echo '<div id="message" class="updated fade"><p>' . __( 'Options saved.', 'advanced-excerpt' ) . '</p></div>';
+		wp_redirect( admin_url( $this->plugin_base ) . '&settings-updated=1' );
+		exit;		
 	}
 
 	function page_options() {
-		if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
-			check_admin_referer( 'advanced_excerpt_update_options' );
-			$this->update_options();
-		}
-
 		extract( $this->options, EXTR_SKIP );
 
 		$ellipsis	= htmlentities( $ellipsis );

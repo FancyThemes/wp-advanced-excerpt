@@ -1,5 +1,8 @@
 <div class="wrap advanced-excerpt">
 	<h2><?php _e( "Advanced Excerpt Options", 'advanced-excerpt' ); ?></h2>
+	<?php if ( isset( $_GET['settings-updated'] ) ) : ?>
+		<div id="message" class="updated fade"><p><?php _e( 'Options saved.', 'advanced-excerpt' ); ?></p></div>
+	<?php endif; ?>
 	<form method="post" action="">
 	<?php if ( function_exists( 'wp_nonce_field' ) ) wp_nonce_field( 'advanced_excerpt_update_options' ); ?>
 		<table class="form-table">
