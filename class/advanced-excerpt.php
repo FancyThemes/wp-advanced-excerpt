@@ -204,6 +204,8 @@ class Advanced_Excerpt {
 		// Some kind of precaution against malformed CDATA in RSS feeds I suppose
 		$text = str_replace( ']]>', ']]&gt;', $text );
 
+		$original_post_content = $text;
+
 		// Determine allowed tags
 		if ( !isset( $allowed_tags ) ) {
 			$allowed_tags = $this->options_all_tags;
@@ -227,7 +229,9 @@ class Advanced_Excerpt {
 		$text = $this->text_excerpt( $text, $length, $length_type, $finish );
 
 		// Add the ellipsis or link
-		$text = $this->text_add_more( $text, $ellipsis, ( $add_link ) ? $read_more : false );
+		if ( !apply_filters( 'advanced_excerpt_disable_add_more', false, $original_post_content, $this->options ) ) {
+			$text = $this->text_add_more( $text, $ellipsis, ( $add_link ) ? $read_more : false );
+		}
 
 		return apply_filters( 'advanced_excerpt_content', $text );
 	}
