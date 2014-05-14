@@ -19,6 +19,7 @@ class Advanced_Excerpt {
 		'allowed_tags' => array( '_all' ),
 		'the_excerpt' => 1,
 		'the_content' => 1,
+		'exclude_pages' => array(),
 	);
 
 	public $options_basic_tags; // Basic HTML tags (determines which tags are in the checklist by default)
@@ -163,15 +164,18 @@ class Advanced_Excerpt {
 	function filter( $text ) {
 		/*
 		 * Allow developers to skip running the advanced excerpt filters on certain page types.
-		 * They can do so by passing in an array of page types they'd like to skip
+		 * They can do so by using the "Disable On" checkboxes on the options page or 
+		 * by passing in an array of page types they'd like to skip
 		 * e.g. array( 'search', 'author' );
+		 * The filter, when implemented, takes precedence over the options page selection.
 		 *
 		 * WordPress default themes (and others) do not use the_excerpt() or get_the_excerpt()
 		 * instead they use the_content(). As such, we also need to hook into the_content().
 		 * To ensure we're not changing the content of posts / pages we first check if is_singular().
 		 */
 		$page_types = $this->get_current_page_types();
-		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', array( 'singular' ) ); 
+		$skip_page_types = array_unique( array_merge( array( 'singular' ), $this->options['exclude_pages'] ) );
+		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', $skip_page_types ); 
 		$page_type_matches = array_intersect( $page_types, $skip_page_types );
 		if ( !empty( $page_types ) && !empty( $page_type_matches ) ) return $text;
 
@@ -312,6 +316,7 @@ class Advanced_Excerpt {
 		$this->options['ellipsis'] = $_POST['ellipsis'];
 		$this->options['read_more'] = $_POST['read_more'];
 		$this->options['allowed_tags'] = ( isset( $_POST['allowed_tags'] ) ) ? array_unique( (array) $_POST['allowed_tags'] ) : array();
+		$this->options['exclude_pages'] = ( isset( $_POST['exclude_pages'] ) ) ? array_unique( (array) $_POST['exclude_pages'] ) : array();
 
 		update_option( 'advanced_excerpt', $this->options );
 
@@ -332,6 +337,18 @@ class Advanced_Excerpt {
 		$tag_list = array_unique( array_merge( $this->options_basic_tags, $allowed_tags ) );
 		sort( $tag_list );
 		$tag_cols = 5;
+
+		// provides a set of checkboxes allowing the user to exclude the excerpt filter on certain page types
+		$exclude_pages_list = array(
+			'home'			=> __( 'Home Page', 'advanced-excerpt' ),
+			'feed'			=> __( 'Posts RSS Feed', 'advanced-excerpt' ),
+			'comment_feed'	=> __( 'Comments RSS Feed', 'advanced-excerpt' ),
+			'search'		=> __( 'Search Archive', 'advanced-excerpt' ),
+			'author'		=> __( 'Author Archive', 'advanced-excerpt' ),
+			'category'		=> __( 'Category Archive', 'advanced-excerpt' ),
+			'tag'			=> __( 'Tag Archive', 'advanced-excerpt' ),
+		);
+		$exclude_pages_list = apply_filters( 'advanced_excerpt_exclude_pages_list', $exclude_pages_list );
 
 		require_once $this->plugin_dir_path . 'template/options.php';
 	}

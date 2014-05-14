@@ -116,6 +116,26 @@
 				</td>
 			</tr>
 			<tr valign="top">
+				<th scope="row">
+					<?php _e( "Disable On:", 'advanced-excerpt' ); ?>
+				</th>
+				<td>
+					<p>
+						<?php foreach ( $exclude_pages_list as $key => $label ) : 
+							$key_dashed = str_replace( '_', '-', $key ); ?>
+							<label for="<?php echo $key_dashed; ?>">
+							<input name="exclude_pages[]" type="checkbox" id="<?php echo $key_dashed; ?>" value="<?php echo $key; ?>" <?php echo ( in_array( $key, $exclude_pages ) ) ? 'checked="checked"' : ''; ?> />
+							<?php echo $label; ?>
+							</label><br />
+						<?php endforeach; ?>
+					<p>
+
+					<p class="description">
+						<?php _e( 'Disables excerpt filtering for certain page types.', 'advanced-excerpt' ); ?>
+					</p>
+				</td>
+			</tr>
+			<tr valign="top">
 				<th scope="row"><?php _e( "Keep Markup:", 'advanced-excerpt' ); ?></th>
 				<td>
 					<table id="tags-table">
