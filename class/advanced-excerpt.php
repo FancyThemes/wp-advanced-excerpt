@@ -65,6 +65,27 @@ class Advanced_Excerpt {
 			$this->admin_init();
 		}
 
+		add_action( 'loop_start', array( $this, 'hook_content_filters' ) );
+	}
+
+	function hook_content_filters() {
+		/*
+		 * Allow developers to skip running the advanced excerpt filters on certain page types.
+		 * They can do so by using the "Disable On" checkboxes on the options page or 
+		 * by passing in an array of page types they'd like to skip
+		 * e.g. array( 'search', 'author' );
+		 * The filter, when implemented, takes precedence over the options page selection.
+		 *
+		 * WordPress default themes (and others) do not use the_excerpt() or get_the_excerpt()
+		 * instead they use the_content(). As such, we also need to hook into the_content().
+		 * To ensure we're not changing the content of posts / pages we first check if is_singular().
+		 */
+		$page_types = $this->get_current_page_types();
+		$skip_page_types = array_unique( array_merge( array( 'singular' ), $this->options['exclude_pages'] ) );
+		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', $skip_page_types ); 
+		$page_type_matches = array_intersect( $page_types, $skip_page_types );
+		if ( !empty( $page_types ) && !empty( $page_type_matches ) ) return;
+
 		if( 1 == $this->options['the_excerpt'] ) {
 			remove_all_filters( 'get_the_excerpt' );
 			add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
@@ -167,23 +188,6 @@ class Advanced_Excerpt {
 	}
 
 	function filter( $text ) {
-		/*
-		 * Allow developers to skip running the advanced excerpt filters on certain page types.
-		 * They can do so by using the "Disable On" checkboxes on the options page or 
-		 * by passing in an array of page types they'd like to skip
-		 * e.g. array( 'search', 'author' );
-		 * The filter, when implemented, takes precedence over the options page selection.
-		 *
-		 * WordPress default themes (and others) do not use the_excerpt() or get_the_excerpt()
-		 * instead they use the_content(). As such, we also need to hook into the_content().
-		 * To ensure we're not changing the content of posts / pages we first check if is_singular().
-		 */
-		$page_types = $this->get_current_page_types();
-		$skip_page_types = array_unique( array_merge( array( 'singular' ), $this->options['exclude_pages'] ) );
-		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', $skip_page_types ); 
-		$page_type_matches = array_intersect( $page_types, $skip_page_types );
-		if ( !empty( $page_types ) && !empty( $page_type_matches ) ) return $text;
-
 		extract( wp_parse_args( $this->options, $this->default_options ), EXTR_SKIP );
 
 		// Avoid custom excerpts
