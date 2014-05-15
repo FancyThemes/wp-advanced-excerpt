@@ -1,3 +1,10 @@
+.advanced-excerpt .advanced-excerpt-container {
+  position: relative;
+}
+.advanced-excerpt .advanced-excerpt-main {
+  margin-right: 320px;
+  min-height: 775px;
+}
 .advanced-excerpt #length {
   vertical-align: inherit;
 }
@@ -19,4 +26,120 @@
 }
 .advanced-excerpt .disabled input {
   cursor: default;
+}
+.advanced-excerpt #advanced-excerpt-sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 250px;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .author {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .author img {
+  float: left;
+  margin-right: 20px;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .author .desc {
+  float: left;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .author h3 {
+  font-size: 12px;
+  margin: 0;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .author h2 {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .author h2 a {
+  color: #464646;
+  text-decoration: none;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .author h2 a:hover {
+  color: #000;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .author p {
+  margin: 0;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .video {
+  position: relative;
+  display: block;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .video:before, .advanced-excerpt #advanced-excerpt-sidebar .video:after {
+  position: absolute;
+  content: " ";
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .video:before {
+  width: 60px;
+  height: 60px;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  -ms-border-radius: 60px;
+  -o-border-radius: 60px;
+  border-radius: 60px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  z-index: 2;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .video:after {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+  border: 20px solid transparent;
+  border-top-width: 12px;
+  border-bottom-width: 12px;
+  border-left-color: #333;
+  background: transparent;
+  display: block;
+  left: 23.4375px;
+  width: 0px;
+  height: 0px;
+  z-index: 3;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .subscribe h2 {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0.5em;
+  color: #666;
+  font-size: 20px;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .subscribe h3 {
+  font-size: 16px;
+  margin: 0;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .subscribe p {
+  margin: 0;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .subscribe p.interesting {
+  margin-bottom: 1em;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .subscribe .links {
+  margin-bottom: 2em;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .subscribe .links a {
+  text-decoration: none;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .subscribe .promise {
+  color: #999;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .subscribe .field {
+  margin-bottom: 1em;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .subscribe .field p {
+  margin-bottom: 0.3em;
+}
+.advanced-excerpt #advanced-excerpt-sidebar .subscribe .field.submit-button {
+  margin-bottom: 1em;
 }
