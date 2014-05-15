@@ -357,7 +357,6 @@ class Advanced_Excerpt {
 		$exclude_pages_list = array(
 			'home'			=> __( 'Home Page', 'advanced-excerpt' ),
 			'feed'			=> __( 'Posts RSS Feed', 'advanced-excerpt' ),
-			'comment_feed'	=> __( 'Comments RSS Feed', 'advanced-excerpt' ),
 			'search'		=> __( 'Search Archive', 'advanced-excerpt' ),
 			'author'		=> __( 'Author Archive', 'advanced-excerpt' ),
 			'category'		=> __( 'Category Archive', 'advanced-excerpt' ),
