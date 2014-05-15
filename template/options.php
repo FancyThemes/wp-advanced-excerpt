@@ -121,7 +121,7 @@
 								<li>
 									<label id="the-content-no-break-label" for="the-content-no-break" <?php echo ( 1 !== $the_content ) ? 'class="disabled"' : ''; ?>>
 									<input name="the_content_no_break" type="checkbox" id="the-content-no-break" value="on" <?php echo ( 1 == $the_content_no_break && 1 == $the_content ) ? 'checked="checked"' : ''; ?> <?php echo ( 1 !== $the_content ) ? 'disabled="disabled"' : ''; ?> />
-									<?php _e( "Only filter <span class='monospaced'>the_content()</span> when there's no break (&lt;!--more--&gt;) tag) in the post content", 'advanced-excerpt' ); ?>
+									<?php _e( "Only filter <span class='monospaced'>the_content()</span> when there's no break (&lt;!--more--&gt;) tag in the post content", 'advanced-excerpt' ); ?>
 									</label>
 								</li>
 							</ul>
