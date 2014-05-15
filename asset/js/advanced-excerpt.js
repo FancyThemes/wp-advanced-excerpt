@@ -7,6 +7,17 @@
 		$('#tags-table input').each(function(i, el){
 		   tag_list.push($(el).val()); 
 		});
+
+		$('#the-content').change(function(event){
+			if( $(this).is(':checked') ){
+				$('#the-content-no-break-label').removeClass('disabled');
+				$('#the-content-no-break').removeAttr('disabled');
+			} else {
+				$('#the-content-no-break-label').addClass('disabled');
+				$('#the-content-no-break').attr('disabled','disabled');
+				$('#the-content-no-break').attr('checked', false);
+			}
+		});
 		
 		// Add a tag to the checkbox table
 		$('#add-tag').click(function(event){

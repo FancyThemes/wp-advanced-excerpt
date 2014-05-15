@@ -10,3 +10,13 @@
 .advanced-excerpt .monospaced {
   font-family: Consolas,Monaco,monospace;
 }
+.advanced-excerpt .sub-options {
+  margin: 2px 0px 0px 25px;
+}
+.advanced-excerpt .disabled {
+  color: #999999;
+  cursor: default;
+}
+.advanced-excerpt .disabled input {
+  cursor: default;
+}

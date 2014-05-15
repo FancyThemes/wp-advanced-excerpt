@@ -3,7 +3,7 @@
 	<?php if ( isset( $_GET['settings-updated'] ) ) : ?>
 		<div id="message" class="updated fade"><p><?php _e( 'Options saved.', 'advanced-excerpt' ); ?></p></div>
 	<?php endif; ?>
-	<form method="post" action="">
+	<form method="post" action="" autocomplete="off">
 	<?php if ( function_exists( 'wp_nonce_field' ) ) wp_nonce_field( 'advanced_excerpt_update_options' ); ?>
 		<table class="form-table">
 			<tr valign="top">
@@ -111,8 +111,16 @@
 						<input name="the_content" type="checkbox" id="the-content" value="on" <?php echo ( 1 == $the_content ) ? 'checked="checked"' : ''; ?> />
 						<span class='monospaced'>the_content()</span>
 						</label>
-					<p>
-
+					</p>
+					<ul class="sub-options">
+						<li>
+							<label id="the-content-no-break-label" for="the-content-no-break" <?php echo ( 1 !== $the_content ) ? 'class="disabled"' : ''; ?>>
+							<input name="the_content_no_break" type="checkbox" id="the-content-no-break" value="on" <?php echo ( 1 == $the_content_no_break && 1 == $the_content ) ? 'checked="checked"' : ''; ?> <?php echo ( 1 !== $the_content ) ? 'disabled="disabled"' : ''; ?> />
+							<?php _e( "Only filter <span class='monospaced'>the_content()</span> when there's no break in the post content", 'advanced-excerpt' ); ?>
+							</label>
+						</li>
+					</ul>
+					
 					<p class="description">
 						<?php _e( 'Themes may use <code>the_excerpt()</code> for some pages (e.g. search results) and <code>the_content()</code> on others (e.g. blog archives).<br />Depending on your theme and what pages you want this plugin to affect, you may need to adjust these settings.', 'advanced-excerpt' ); ?>
 					</p>

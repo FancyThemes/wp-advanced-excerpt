@@ -19,6 +19,7 @@ class Advanced_Excerpt {
 		'allowed_tags' => array( '_all' ),
 		'the_excerpt' => 1,
 		'the_content' => 1,
+		'the_content_no_break' => 0,
 		'exclude_pages' => array(),
 	);
 
@@ -188,7 +189,9 @@ class Advanced_Excerpt {
 	}
 
 	function filter( $text ) {
+		global $post;
 		extract( wp_parse_args( $this->options, $this->default_options ), EXTR_SKIP );
+		$original_excerpt = $text;
 
 		// Avoid custom excerpts
 		if ( !empty( $text ) && !$no_custom ) {
@@ -196,17 +199,20 @@ class Advanced_Excerpt {
 		}
 
 		// Get the full content and filter it
-		$text = get_the_content( '' );
+		$text = $post->post_content;
 		if ( 1 == $no_shortcode ) {
 			$text = strip_shortcodes( $text );
 		}
-
 		if( 1 == $this->options['the_content'] ) {
 			remove_filter( 'the_content', array( $this, 'filter' ) ); // prevent recursion
 		}
 		$text = apply_filters( 'the_content', $text );
 		if( 1 == $this->options['the_content'] ) {
 			add_filter( 'the_content', array( $this, 'filter' ) ); // add our filter back in
+		}
+
+		if ( $the_content_no_break && false !== strpos( $text, '<!--more-->' ) ) {
+			return $original_excerpt;
 		}
 
 		// From the default wp_trim_excerpt():
@@ -318,7 +324,7 @@ class Advanced_Excerpt {
 		$_POST = stripslashes_deep( $_POST );
 		$this->options['length'] = (int) $_POST['length'];
 
-		$checkbox_options = array( 'no_custom', 'no_shortcode', 'add_link', 'the_excerpt', 'the_content' );
+		$checkbox_options = array( 'no_custom', 'no_shortcode', 'add_link', 'the_excerpt', 'the_content', 'the_content_no_break' );
 
 		foreach ( $checkbox_options as $checkbox_option ) {
 			$this->options[$checkbox_option] = ( isset( $_POST[$checkbox_option] ) ) ? 1 : 0;

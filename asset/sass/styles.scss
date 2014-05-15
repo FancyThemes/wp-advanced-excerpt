@@ -17,4 +17,16 @@
 		font-family: Consolas,Monaco,monospace;
 	}
 
+	.sub-options {
+		margin: 2px 0px 0px 25px;
+	}
+
+	.disabled {
+		input {
+			cursor: default;
+		}
+		color: #999999;
+		cursor: default;
+	}
+
 }
