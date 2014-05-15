@@ -1,9 +1,10 @@
 <div id="advanced-excerpt-sidebar">
+<div class="inside">
 
 	<div class="author">
-		<img src="//www.gravatar.com/avatar/e538ca4cb34839d4e5e3ccf20c37c67b?s=128&amp;d" width="64" height="64" />
+		<img src="http://www.gravatar.com/avatar/e538ca4cb34839d4e5e3ccf20c37c67b?s=128&amp;d" width="64" height="64" />
 		<div class="desc">
-			<h3><?php _e( 'Created &amp; maintained by', 'advanced-excerpt' ); ?></h3>
+			<h3><?php _e( 'Maintained by', 'advanced-excerpt' ); ?></h3>
 			<h2>Brad Touesnard</h2>
 			<p>
 				<a href="http://profiles.wordpress.org/bradt/" target="_blank"><?php _e( 'Profile', 'advanced-excerpt' ); ?></a>
@@ -13,32 +14,21 @@
 		</div>
 	</div>
 
-	<form method="post" action="http://deliciousbrains.createsend.com/t/t/s/virn/" target="_blank" class="subscribe">
-		<h2><?php _e( 'Pro Version Has Arrived!', 'advanced-excerpt' ); ?></h2>
-
-		<a class="video" target="_blank" href="http://deliciousbrains.com/wp-migrate-db-pro/?utm_source=insideplugin&utm_medium=web&utm_campaign=freeplugin#play-intro"><img src="<?php echo plugins_url( 'asset/img/video@2x.jpg', $this->plugin_file_path ); ?>" width="250" height="164" alt="" /></a>
-
-		<p class="links">
-			<a href="http://deliciousbrains.com/wp-migrate-db-pro/?utm_source=insideplugin&utm_medium=web&utm_campaign=freeplugin" target="_blank"><?php _e( 'View Features &rarr;', 'advanced-excerpt' ); ?></a>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://deliciousbrains.com/wp-migrate-db-pro/pricing/?utm_source=insideplugin&utm_medium=web&utm_campaign=freeplugin" target="_blank"><?php _e( 'View Pricing &rarr;', 'advanced-excerpt' ); ?></a>
-		</p>
+	<form method="post" action="http://deliciousbrains.createsend.com/t/t/s/tdiull/" target="_blank" class="subscribe">
+		<h2><?php _e( 'WordPress Development and Deployment Strategy', 'advanced-excerpt' ); ?></h2>
 
 		<?php $user = wp_get_current_user(); ?>
 
-		<h3><em><?php _e( 'Get 20% Off!', 'c' ); ?></em></h3>
-
 		<p class="interesting">
-			<?php _e( 'Subscribe to receive news &amp; updates below and we\'ll instantly send you a coupon code to get 20% off any WP Migrate DB Pro license.', 'advanced-excerpt' ); ?>
+			<?php _e( '<strong>Free pro tips</strong> on advanced WordPress development techniques and deployment strategies.', 'advanced-excerpt' ); ?>
 		</p>
 
 		<div class="field notify-name">
-			<p><?php _e( 'Your Name', 'advanced-excerpt' ); ?></p>
-			<input type="text" name="cm-name" value="<?php echo trim( esc_attr( $user->first_name ) . ' ' . esc_attr( $user->last_name ) ); ?>" />
+			<input type="text" name="cm-name" value="<?php echo trim( esc_attr( $user->first_name ) . ' ' . esc_attr( $user->last_name ) ); ?>" placeholder="<?php _e( 'Your Name', 'advanced-excerpt' ); ?>" />
 		</div>
 
 		<div class="field notify-email">
-			<p><?php _e( 'Your Email', 'advanced-excerpt' ); ?></p>
-			<input type="email" name="cm-virn-virn" value="<?php echo esc_attr( $user->user_email ); ?>" />
+			<input type="email" name="cm-tdiull-tdiull" value="<?php echo esc_attr( $user->user_email ); ?>" placeholder="<?php _e( 'Your Email', 'advanced-excerpt' ); ?>" />
 		</div>
 
 		<div class="field submit-button">
@@ -49,5 +39,9 @@
 			<?php _e( 'I promise I will not use your email for anything else and you can unsubscribe with <span style="white-space: nowrap;">1-click anytime</span>.', 'advanced-excerpt' ); ?>
 		</p>
 	</form>
+
+</div>
+
+<a class="wpmdb-banner" target="_blank" href="http://deliciousbrains.com/wp-migrate-db-pro/?utm_source=advanced-excerpt&utm_medium=plugin&utm_campaign=advanced-excerpt"><img src="<?php echo plugins_url( 'asset/img/wp-migrate-db-pro.jpg', $this->plugin_file_path ); ?>" width="292" height="292" alt="<?php _e( 'WP Migrate DB Pro &mdash; Push and pull your database from one WordPress install to another in 1-click.', 'advanced-excerpt' ); ?>" /></a>
 
 </div>

@@ -121,13 +121,13 @@
 								<li>
 									<label id="the-content-no-break-label" for="the-content-no-break" <?php echo ( 1 !== $the_content ) ? 'class="disabled"' : ''; ?>>
 									<input name="the_content_no_break" type="checkbox" id="the-content-no-break" value="on" <?php echo ( 1 == $the_content_no_break && 1 == $the_content ) ? 'checked="checked"' : ''; ?> <?php echo ( 1 !== $the_content ) ? 'disabled="disabled"' : ''; ?> />
-									<?php _e( "Only filter <span class='monospaced'>the_content()</span> when there's no break in the post content", 'advanced-excerpt' ); ?>
+									<?php _e( "Only filter <span class='monospaced'>the_content()</span> when there's no break (&lt;!--more--&gt;) tag) in the post content", 'advanced-excerpt' ); ?>
 									</label>
 								</li>
 							</ul>
 							
 							<p class="description">
-								<?php _e( 'Themes may use <code>the_excerpt()</code> for some pages (e.g. search results) and <code>the_content()</code> on others (e.g. blog archives).<br />Depending on your theme and what pages you want this plugin to affect, you may need to adjust these settings.', 'advanced-excerpt' ); ?>
+								<?php _e( 'Themes may use <code>the_excerpt()</code> for some pages (e.g. search results) and <code>the_content()</code> on others (e.g. blog archives). Depending on your theme and what pages you want this plugin to affect, you may need to adjust these settings.', 'advanced-excerpt' ); ?>
 							</p>
 						</td>
 					</tr>

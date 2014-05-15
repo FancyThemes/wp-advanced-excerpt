@@ -177,8 +177,10 @@ class Advanced_Excerpt {
 		$src = $plugins_url . 'asset/css/styles.css';
 		wp_enqueue_style( 'advanced-excerpt-styles', $src, array(), $version );
 
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
 		// js
-		$src = $plugins_url . 'asset/js/advanced-excerpt.js';
+		$src = $plugins_url . 'asset/js/advanced-excerpt' . $suffix . '.js';
 		wp_enqueue_script( 'advanced-excerpt-script', $src, array( 'jquery' ), $version, true );
 	}
 
