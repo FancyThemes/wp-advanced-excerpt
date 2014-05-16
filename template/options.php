@@ -155,8 +155,8 @@
 							<table id="tags-table">
 								<tr>
 									<td colspan="<?php echo $tag_cols; ?>">
-										<label for="allowed-tags">
-										<input name="allowed_tags[]" type="checkbox" id="allowed-tags" value="_all" <?php echo ( in_array( '_all', $allowed_tags ) ) ? 'checked="checked" ' : ''; ?> />
+										<label for="dont-remove-any-markup">
+										<input name="allowed_tags[]" type="checkbox" id="dont-remove-any-markup" value="_all" <?php echo ( in_array( '_all', $allowed_tags ) ) ? 'checked="checked" ' : ''; ?> />
 				   						<?php _e( "Don't remove any markup", 'advanced-excerpt' ); ?>
 				   						</label>
 									</td>
@@ -166,7 +166,7 @@
 								foreach ( $tag_list as $tag ) :
 									if ( $tag == '_all' ) continue;
 									if ( 0 == $i % $tag_cols ) : ?>
-									<tr>
+									<tr<?php echo ( in_array( '_all', $allowed_tags ) ) ? ' style="display: none;"' : '' ?>>
 									<?php endif; $i++; ?>
 										<td>
 											<label for="<?php echo 'ae-' . $tag; ?>">
@@ -186,15 +186,18 @@
 									<?php endif; ?>
 							</table>
 
-							<a href="" id="select-all"><?php _e( "Select all", 'advanced-excerpt' ); ?></a> / <a href="" id="select-none"><?php _e( "Select none", 'advanced-excerpt' ); ?></a><br />
-							<?php _e( "More tags", 'advanced-excerpt' ); ?>
-							<select name="more_tags" id="more-tags">
-							<?php foreach ( array_diff( $this->options_all_tags, $this->options_basic_tags ) as $tag ) : ?>
-								<option value="<?php echo $tag; ?>"><?php echo $tag; ?></option>
-							<?php endforeach; ?>
-							</select>
+							<div class="tags-control"<?php echo ( in_array( '_all', $allowed_tags ) ) ? ' style="display: none;"' : '' ?>>
+								<a href="" id="select-all"><?php _e( "Select all", 'advanced-excerpt' ); ?></a> / <a href="" id="select-none"><?php _e( "Select none", 'advanced-excerpt' ); ?></a><br />
+								<?php _e( "More tags", 'advanced-excerpt' ); ?>
+								<select name="more_tags" id="more-tags">
+								<?php foreach ( array_diff( $this->options_all_tags, $this->options_basic_tags ) as $tag ) : ?>
+									<option value="<?php echo $tag; ?>"><?php echo $tag; ?></option>
+								<?php endforeach; ?>
+								</select>
 
-							<input type="button" name="add_tag" id="add-tag" class="button" value="<?php _e( "Add tag", 'advanced-excerpt' ); ?>" />
+								<input type="button" name="add_tag" id="add-tag" class="button" value="<?php _e( "Add tag", 'advanced-excerpt' ); ?>" />
+							</div>
+
 						</td>
 					</tr>
 				</table>

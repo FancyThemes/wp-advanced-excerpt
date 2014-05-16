@@ -26,7 +26,17 @@
 				$('#read-more').attr('disabled','disabled');
 			}
 		});
-		
+
+		$('#dont-remove-any-markup').change(function(event){
+			if( $(this).is(':checked') ){
+				$('#tags-table tr').not(':first-child').hide();
+				$('.tags-control').hide();
+			} else {
+				$('#tags-table tr').not(':first-child').show();
+				$('.tags-control').show();
+			}
+		});
+
 		// Add a tag to the checkbox table
 		$('#add-tag').click(function(event){
 			event.preventDefault();
