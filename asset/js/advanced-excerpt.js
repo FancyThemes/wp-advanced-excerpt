@@ -18,6 +18,14 @@
 				$('#the-content-no-break').attr('checked', false);
 			}
 		});
+
+		$('#add-link').change(function(event){
+			if( $(this).is(':checked') ){
+				$('#read-more').removeAttr('disabled');
+			} else {
+				$('#read-more').attr('disabled','disabled');
+			}
+		});
 		
 		// Add a tag to the checkbox table
 		$('#add-tag').click(function(event){

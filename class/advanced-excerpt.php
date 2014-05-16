@@ -335,7 +335,7 @@ class Advanced_Excerpt {
 		$this->options['length_type'] = $_POST['length_type'];
 		$this->options['finish'] = $_POST['finish'];
 		$this->options['ellipsis'] = $_POST['ellipsis'];
-		$this->options['read_more'] = $_POST['read_more'];
+		$this->options['read_more'] = isset( $_POST['read_more'] ) ? $_POST['read_more'] : $this->options['read_more'];
 		$this->options['allowed_tags'] = ( isset( $_POST['allowed_tags'] ) ) ? array_unique( (array) $_POST['allowed_tags'] ) : array();
 		$this->options['exclude_pages'] = ( isset( $_POST['exclude_pages'] ) ) ? array_unique( (array) $_POST['exclude_pages'] ) : array();
 

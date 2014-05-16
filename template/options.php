@@ -64,16 +64,14 @@
 					</tr>
 					<tr valign="top">
 						<th scope="row">
-							<label for="read-more">
-							<?php _e( "&lsquo;Read-more&rsquo; Text:", 'advanced-excerpt' ); ?>
-							</label>
+							<?php _e( "Read More Link:", 'advanced-excerpt' ); ?>
 						</th>
 						<td>
-							<input name="read_more" type="text" id="read-more" value="<?php echo $read_more; ?>" />
 							<label for="add-link">
 							<input name="add_link" type="checkbox" id="add-link" value="on" <?php echo ( 1 == $add_link ) ? 'checked="checked"' : ''; ?> />
-							<?php _e( "Add link to excerpt", 'advanced-excerpt' ); ?>
-							</label>
+							<?php _e( "Add read more link to excerpt", 'advanced-excerpt' ); ?>
+							</label><br />
+							<input name="read_more" type="text" id="read-more" value="<?php echo $read_more; ?>" <?php echo ( 1 !== $add_link ) ? 'disabled="disabled"' : ''; ?> />
 						</td>
 					</tr>
 					<tr valign="top">
