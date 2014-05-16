@@ -26,6 +26,8 @@ Most of the above features are optional and/or can be customized by the user or 
 
 Interested in contributing to Advanced Excerpt? Please visit https://github.com/deliciousbrains/wp-advanced-excerpt
 
+See [our wiki](https://github.com/deliciousbrains/wp-advanced-excerpt/wiki) for additional documentation.
+
 Banner image credit - [chillihead](https://www.flickr.com/photos/chillihead/)
 
 Original plugin author - [basvd](http://profiles.wordpress.org/basvd)
