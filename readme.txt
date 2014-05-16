@@ -45,7 +45,7 @@ A short version of a post that is usually displayed wherever the whole post woul
 
 = Why do I need this plugin? =
 
-The default excerpt created by WordPress removes all HTML. If your theme uses `the_excerpt()` to view excerpts, they might look weird because of this (smilies are removed, lists are flattened, etc.) This plugin fixes that and also gives you more control over excerpts.
+The default excerpt created by WordPress removes all HTML. If your theme uses `the_excerpt()` or `the_content()` to view excerpts, they might look weird because of this (smilies are removed, lists are flattened, etc.) This plugin fixes that and also gives you more control over excerpts.
 
 = Does it work for WordPress version x.x.x? =
 
@@ -65,18 +65,17 @@ If you require multibyte character support on your website, you can [override th
 
 = Can I manually call the filter in my WP theme or plugin? =
 
-The plugin automatically hooks on `the_excerpt()` function and uses the parameters specified in the options panel.
+The plugin automatically hooks on `the_excerpt()` and `the_content()` functions and uses the parameters specified in the options panel.
 
 If you want to call the filter with different options, you can use `the_advanced_excerpt()` template tag provided by this plugin. This tag accepts [query-string-style parameters](http://codex.wordpress.org/Template_Tags/How_to_Pass_Tag_Parameters#Tags_with_query-string-style_parameters) (theme developers will be familiar with this notation).
 
 The following parameters can be set:
 
 * `length`, an integer that determines the length of the excerpt
-* `use_words`, if set to `1`, the excerpt length will be in words; if set to `0`, characters will be used for the count
+* `length_type`, enumeration, if set to `words` the excerpt length will be in words; if set to `characters` the excerpt length will be in characters
 * `no_custom`, if set to `1`, an excerpt will be generated even if the post has a custom excerpt; if set to `0`, the custom excerpt will be used
 * `no_shortcode`, if set to `1`, shortcodes are removed from the excerpt; if set to `0`, shortcodes will be parsed
-* `finish_word`, if set to `1`, the last word in the excerpt will not be cut off; if set to `0`, no effort is made to finish the word
-* `finish_sentence`, if set to `1`, the last sentence in the excerpt will not be cut off; if set to `0`, no effort is made to include the full sentence
+* `finish`, enumeration, if set to `exact` the excerpt will be the exact lenth as defined by the "Excerpt Length" option. If set to `word` the last word in the excerpt will be completed. If set to `sentence` the last sentence in the excerpt will be completed.
 * `ellipsis`, the string that will substitute the omitted part of the post; if you want to use HTML entities in the string, use `%26` instead of the `&` prefix to avoid breaking the query
 * `read_more`, the text used in the read-more link
 * `add_link`, if set to `1`, the read-more link will be appended; if `0`, no link will be added
@@ -85,7 +84,7 @@ The following parameters can be set:
 
 A custom advanced excerpt call could look like this:
 
-`the_advanced_excerpt('length=320&use_words=0&no_custom=1&ellipsis=%26hellip;&exclude_tags=img,p,strong');`
+`the_advanced_excerpt('length=320&length_type=words&no_custom=1&ellipsis=%26hellip;&exclude_tags=img,p,strong');`
 
 = Does this plugin work outside the Loop? =
 
