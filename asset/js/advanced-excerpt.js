@@ -27,13 +27,13 @@
 			}
 		});
 
-		$('#dont-remove-any-markup').change(function(event){
-			if( $(this).is(':checked') ){
+		$('input[name=allowed_tags_option]').change(function(event){
+			if ( 'dont_remove_any' == $(this).val() ){
 				$('#tags-table tr').not(':first-child').hide();
 				$('.tags-control').hide();
 			} else {
 				$('#tags-table tr').not(':first-child').show();
-				$('.tags-control').show();
+				$('.tags-control').show();			
 			}
 		});
 

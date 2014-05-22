@@ -150,23 +150,30 @@
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row"><?php _e( "Keep Markup:", 'advanced-excerpt' ); ?></th>
+						<th scope="row">
+							<?php _e( "Strip Tags:", 'advanced-excerpt' ); ?>
+						</th>
 						<td>
 							<table id="tags-table">
 								<tr>
 									<td colspan="<?php echo $tag_cols; ?>">
-										<label for="dont-remove-any-markup">
-										<input name="allowed_tags[]" type="checkbox" id="dont-remove-any-markup" value="_all" <?php echo ( in_array( '_all', $allowed_tags ) ) ? 'checked="checked" ' : ''; ?> />
-				   						<?php _e( "Don't remove any markup", 'advanced-excerpt' ); ?>
-				   						</label>
+										<p>
+											<label for="dont-remove-any-tags">
+											<input name="allowed_tags_option" type="radio" id="dont-remove-any-tags" value="dont_remove_any" <?php echo ( 'dont_remove_any' == $allowed_tags_option ) ? 'checked="checked"' : ''; ?> />
+											<?php _e( "Don't remove any tags", 'advanced-excerpt' ); ?>
+											</label><br />
+											<label for="remove-all-tags-except">
+											<input name="allowed_tags_option" type="radio" id="remove-all-tags-except" value="remove_all_tags_except" <?php echo ( 'remove_all_tags_except' == $allowed_tags_option ) ? 'checked="checked"' : ''; ?> />
+											<?php _e( "Remove all tags except the following", 'advanced-excerpt' ); ?>
+											</label>
+										</p>
 									</td>
 								</tr>
 								<?php
 								$i = 0;
 								foreach ( $tag_list as $tag ) :
-									if ( $tag == '_all' ) continue;
 									if ( 0 == $i % $tag_cols ) : ?>
-									<tr<?php echo ( in_array( '_all', $allowed_tags ) ) ? ' style="display: none;"' : '' ?>>
+									<tr<?php echo ( 'dont_remove_any' == $allowed_tags_option ) ? ' style="display: none;"' : '' ?>>
 									<?php endif; $i++; ?>
 										<td>
 											<label for="<?php echo 'ae-' . $tag; ?>">
@@ -186,7 +193,7 @@
 									<?php endif; ?>
 							</table>
 
-							<div class="tags-control"<?php echo ( in_array( '_all', $allowed_tags ) ) ? ' style="display: none;"' : '' ?>>
+							<div class="tags-control"<?php echo ( 'dont_remove_any' == $allowed_tags_option ) ? ' style="display: none;"' : '' ?>>
 								<a href="" id="select-all"><?php _e( "Select all", 'advanced-excerpt' ); ?></a> / <a href="" id="select-none"><?php _e( "Select none", 'advanced-excerpt' ); ?></a><br />
 								<?php _e( "More tags", 'advanced-excerpt' ); ?>
 								<select name="more_tags" id="more-tags">

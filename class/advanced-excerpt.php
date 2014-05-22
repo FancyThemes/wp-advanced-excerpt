@@ -16,11 +16,12 @@ class Advanced_Excerpt {
 		'ellipsis' => '&hellip;',
 		'read_more' => 'Read the rest',
 		'add_link' => 0,
-		'allowed_tags' => array( '_all' ),
+		'allowed_tags' => array(),
 		'the_excerpt' => 1,
 		'the_content' => 1,
 		'the_content_no_break' => 0,
 		'exclude_pages' => array(),
+		'allowed_tags_option' => 'dont_remove_any',
 	);
 
 	public $options_basic_tags; // Basic HTML tags (determines which tags are in the checklist by default)
@@ -116,6 +117,14 @@ class Advanced_Excerpt {
 				$option_name = 'advancedexcerpt_' . $legacy_option;
 				$this->options[$legacy_option] = get_option( $option_name );
 				delete_option( $option_name );
+			}
+
+			// convert legacy option '_all' in the allowed_tags option to it's updated equivalent
+			if ( false !== ( $all_key = array_search( '_all', $this->options['allowed_tags'] ) ) ) {
+				unset( $this->options['allowed_tags'][$all_key] );
+				$this->options['allowed_tags_option'] = 'dont_remove_any';
+			} else {
+				$this->options['allowed_tags_option'] = 'remove_all_tags_except';
 			}
 
 			// filtering the_content() is disabled by default when migrating from version 4.1.1 of the plugin
@@ -232,8 +241,8 @@ class Advanced_Excerpt {
 			$allowed_tags = array_diff( $allowed_tags, $exclude_tags );
 		}
 
-		// Strip HTML if allow-all is not set
-		if ( !in_array( '_all', $allowed_tags ) ) {
+		// Strip HTML if $allowed_tags_option is set to 'remove_all_tags_except'
+		if ( 'remove_all_tags_except' === $allowed_tags_option ) {
 			if ( count( $allowed_tags ) > 0 ) {
 				$tag_string = '<' . implode( '><', $allowed_tags ) . '>';
 			} else {
@@ -338,6 +347,7 @@ class Advanced_Excerpt {
 		$this->options['read_more'] = isset( $_POST['read_more'] ) ? $_POST['read_more'] : $this->options['read_more'];
 		$this->options['allowed_tags'] = ( isset( $_POST['allowed_tags'] ) ) ? array_unique( (array) $_POST['allowed_tags'] ) : array();
 		$this->options['exclude_pages'] = ( isset( $_POST['exclude_pages'] ) ) ? array_unique( (array) $_POST['exclude_pages'] ) : array();
+		$this->options['allowed_tags_option'] = $_POST['allowed_tags_option'];
 
 		update_option( 'advanced_excerpt', $this->options );
 
