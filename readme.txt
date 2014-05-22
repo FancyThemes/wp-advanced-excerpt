@@ -93,6 +93,20 @@ However, you can [start The Loop manually](http://codex.wordpress.org/The_Loop#M
 
 == Changelog ==
 
+= 4.2 =
+* Feature: Toggle excerpt filtering when there's no break (<!--more-->) tag in the post content
+* Feature: Toggle excerpt filtering for the `the_excerpt()` and `the_content()` functions
+* Feature: Toggle excerpt filtering on certain page types
+* Improvement: Added HTML5 tags to the allowed tags list
+* Improvement: Options are now automatically removed from `wp_options` when the plugin is deleted from the dashboard
+* Improvement: Added several WordPress filters, allowing developers to extend/modify the default functionality of the plugin
+* Improvement: Additional strings were made i18n friendly
+* Improvement: All options are now stored in one row in wp_options rather than one row per option
+* Improvement: Several UI elements have be reworded and styled differently to improve user experience
+* Fix: Now works with themes using `the_content()` on archive pages (i.e. WordPress default themes and others)
+* Fix: Notices/warning were appearing when the options were saved while having a checkbox option unchecked
+* Fix: The "Read More" link was being incorrectly appended into certain HTML tags, e.g. <table>, <ul> 
+
 = 4.1 =
 * Fix: Template function with custom options works again
 * Fix: Data before header bug (retro-fixed in 4.0)
