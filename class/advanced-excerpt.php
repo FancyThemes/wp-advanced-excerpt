@@ -110,6 +110,7 @@ class Advanced_Excerpt {
 		 * the option storage to the new method (all options stored in a single row in the DB as an array)
 		*/
 		$update_options = false;
+		$update_from_legacy = false;
 		if ( false !== get_option( 'advancedexcerpt_length' ) ) {
 			$legacy_options = array( 'length', 'use_words', 'no_custom', 'no_shortcode', 'finish_word', 'finish_sentence', 'ellipsis', 'read_more', 'add_link', 'allowed_tags' );
 
@@ -119,19 +120,12 @@ class Advanced_Excerpt {
 				delete_option( $option_name );
 			}
 
-			// convert legacy option '_all' in the allowed_tags option to it's updated equivalent
-			if ( false !== ( $all_key = array_search( '_all', $this->options['allowed_tags'] ) ) ) {
-				unset( $this->options['allowed_tags'][$all_key] );
-				$this->options['allowed_tags_option'] = 'dont_remove_any';
-			} else {
-				$this->options['allowed_tags_option'] = 'remove_all_tags_except';
-			}
-
 			// filtering the_content() is disabled by default when migrating from version 4.1.1 of the plugin
 			$this->options['the_excerpt'] = 1;
 			$this->options['the_content'] = 0;
 
 			$update_options = true;
+			$update_from_legacy = true;
 		} else {
 			$this->options = get_option( 'advanced_excerpt' );
 		}
@@ -157,6 +151,16 @@ class Advanced_Excerpt {
 			unset( $this->options['finish_word'] );
 			unset( $this->options['finish_sentence'] );
 			$update_options = true;
+		}
+
+		// convert legacy option '_all' in the allowed_tags option to it's updated equivalent
+		if ( isset( $this->options['allowed_tags'] ) ) {
+			if ( false !== ( $all_key = array_search( '_all', $this->options['allowed_tags'] ) ) ) {
+				unset( $this->options['allowed_tags'][$all_key] );
+				$this->options['allowed_tags_option'] = 'dont_remove_any';
+			} elseif( $update_from_legacy ) {
+				$this->options['allowed_tags_option'] = 'remove_all_tags_except';
+			}
 		}
 
 		// if no options exist then this is a fresh install, set up some default options
