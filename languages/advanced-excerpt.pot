@@ -1,0 +1,234 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Advanced Excerpt\n"
+"POT-Creation-Date: 2014-05-27 14:13+1000\n"
+"PO-Revision-Date: 2014-05-27 14:14+1000\n"
+"Last-Translator: Delicious Brains <nom@deliciousbrains.com>\n"
+"Language-Team: Delicious Brains <nom@deliciousbrains.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: class/advanced-excerpt.php:180 template/options.php:2
+msgid "Advanced Excerpt Options"
+msgstr ""
+
+#: class/advanced-excerpt.php:180
+msgid "Excerpt"
+msgstr ""
+
+#: class/advanced-excerpt.php:201
+msgid "Settings"
+msgstr ""
+
+#: class/advanced-excerpt.php:374
+msgid "Home Page"
+msgstr ""
+
+#: class/advanced-excerpt.php:375
+msgid "Posts RSS Feed"
+msgstr ""
+
+#: class/advanced-excerpt.php:376
+msgid "Search Archive"
+msgstr ""
+
+#: class/advanced-excerpt.php:377
+msgid "Author Archive"
+msgstr ""
+
+#: class/advanced-excerpt.php:378
+msgid "Category Archive"
+msgstr ""
+
+#: class/advanced-excerpt.php:379
+msgid "Tag Archive"
+msgstr ""
+
+#: template/options.php:4
+msgid "Options saved."
+msgstr ""
+
+#: template/options.php:17
+msgid "Excerpt Length:"
+msgstr ""
+
+#: template/options.php:23
+msgid "Characters"
+msgstr ""
+
+#: template/options.php:24
+msgid "Words"
+msgstr ""
+
+#: template/options.php:31
+msgid "Ellipsis:"
+msgstr ""
+
+#: template/options.php:37
+#, php-format
+msgid "(use <a href=\"%s\" target=\"_blank\">HTML entities</a>)"
+msgstr ""
+
+#: template/options.php:39
+msgid "Will substitute the part of the post that is omitted in the excerpt."
+msgstr ""
+
+#: template/options.php:44
+msgid "Finish:"
+msgstr ""
+
+#: template/options.php:50
+msgid "Exact"
+msgstr ""
+
+#: template/options.php:54
+msgid "Word"
+msgstr ""
+
+#: template/options.php:58
+msgid "Sentence"
+msgstr ""
+
+#: template/options.php:62
+msgid ""
+"Prevents cutting a word or sentence at the end of an excerpt. This option "
+"can result in (slightly) longer excerpts."
+msgstr ""
+
+#: template/options.php:67
+msgid "Read More Link:"
+msgstr ""
+
+#: template/options.php:72
+msgid "Add read more link to excerpt"
+msgstr ""
+
+#: template/options.php:80
+msgid "No Custom Excerpts:"
+msgstr ""
+
+#: template/options.php:86
+msgid "Generate excerpts even if a post has a custom excerpt attached."
+msgstr ""
+
+#: template/options.php:93
+msgid "Strip Shortcodes:"
+msgstr ""
+
+#: template/options.php:99
+msgid "Remove shortcodes from the excerpt. <em>(recommended)</em>"
+msgstr ""
+
+#: template/options.php:105
+msgid "Filter:"
+msgstr ""
+
+#: template/options.php:122
+msgid ""
+"Only filter <span class='monospaced'>the_content()</span> when there's no "
+"break (&lt;!--more--&gt;) tag in the post content"
+msgstr ""
+
+#: template/options.php:128
+msgid ""
+"Themes may use <code>the_excerpt()</code> for some pages (e.g. search "
+"results) and <code>the_content()</code> on others (e.g. blog archives). "
+"Depending on your theme and what pages you want this plugin to affect, you "
+"may need to adjust these settings."
+msgstr ""
+
+#: template/options.php:134
+msgid "Disable On:"
+msgstr ""
+
+#: template/options.php:148
+msgid "Disables excerpt filtering for certain page types."
+msgstr ""
+
+#: template/options.php:154
+msgid "Strip Tags:"
+msgstr ""
+
+#: template/options.php:163
+msgid "Don't remove any tags"
+msgstr ""
+
+#: template/options.php:167
+msgid "Remove all tags except the following"
+msgstr ""
+
+#: template/options.php:197
+msgid "Select all"
+msgstr ""
+
+#: template/options.php:197
+msgid "Select none"
+msgstr ""
+
+#: template/options.php:198
+msgid "More tags"
+msgstr ""
+
+#: template/options.php:205
+msgid "Add tag"
+msgstr ""
+
+#: template/options.php:211
+msgid "Save Changes"
+msgstr ""
+
+#: template/sidebar.php:7
+msgid "Maintained by"
+msgstr ""
+
+#: template/sidebar.php:10
+msgid "Profile"
+msgstr ""
+
+#: template/sidebar.php:12
+msgid "Donate"
+msgstr ""
+
+#: template/sidebar.php:18
+msgid "WordPress Development and Deployment Strategy"
+msgstr ""
+
+#: template/sidebar.php:23
+msgid ""
+"<strong>Free pro tips</strong> on advanced WordPress development techniques "
+"and deployment strategies."
+msgstr ""
+
+#: template/sidebar.php:27
+msgid "Your Name"
+msgstr ""
+
+#: template/sidebar.php:31
+msgid "Your Email"
+msgstr ""
+
+#: template/sidebar.php:35
+msgid "Subscribe"
+msgstr ""
+
+#: template/sidebar.php:39
+msgid ""
+"I promise I will not use your email for anything else and you can "
+"unsubscribe with <span style=\"white-space: nowrap;\">1-click anytime</span>."
+msgstr ""
+
+#: template/sidebar.php:45
+msgid ""
+"WP Migrate DB Pro &mdash; Push and pull your database from one WordPress "
+"install to another in 1-click."
+msgstr ""
