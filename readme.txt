@@ -53,9 +53,7 @@ During development, the plugin is tested with the most recent version(s) of Word
 
 = Is this plugin available in my language? / How do I translate this plugin? =
 
-The plugin comes bundled with a few (2) languages. The correct language will automatically be selected to match your [WordPress locale](http://codex.wordpress.org/WordPress_in_Your_Language).
-
-More information on translation will be added in the future.
+Advanced Excerpt is internationalization (i18n) friendly. If you'd like to contribute a translation for your language please do so by opening a [pull request](https://github.com/deliciousbrains/wp-advanced-excerpt).
 
 = Does this plugin support multibyte characters, such as Chinese? =
 
@@ -110,7 +108,7 @@ However, you can [start The Loop manually](http://codex.wordpress.org/The_Loop#M
 * Improvement: Several UI elements have be reworded and styled differently to improve user experience
 * Fix: Now works with themes using `the_content()` on archive pages (i.e. WordPress default themes and others)
 * Fix: Notices/warning were appearing when the options were saved while having a checkbox option unchecked
-* Fix: The "Read More" link was being incorrectly appended into certain HTML tags, e.g. <table>, <ul> 
+* Fix: The "Read More" link was being incorrectly appended into certain HTML tags, e.g. table tags and list tags
 
 = 4.1 =
 * Fix: Template function with custom options works again
