@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced Excerpt
-Plugin URI: http://deliciousbrains.com/advanced-excerpt/
+Plugin URI: http://wordpress.org/plugins/advanced-excerpt/
 Description: Control the appearance of WordPress post excerpts
 Version: 4.2
 Author: Delicious Brains
