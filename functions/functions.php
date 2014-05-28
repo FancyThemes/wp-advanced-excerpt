@@ -50,8 +50,16 @@ function the_advanced_excerpt( $args = '', $get = false ) {
 		unset( $args['finish_sentence'] );
 	}
 
+	if ( ! empty( $args['allowed_tags'] ) || ! empty( $args['exclude_tags'] ) ) {
+		if ( isset( $args['allowed_tags'] ) && ! in_array( '_all', (array) $args['allowed_tags'] ) ) {
+			$args['allowed_tags_option'] = 'remove_all_tags_except';
+		} else if ( ! isset( $args['allowed_tags'] ) ) {
+			$args['allowed_tags_option'] = 'remove_all_tags_except';
+		}
+	}
+
 	// Set temporary options
-	$advanced_excerpt->options = $args;
+	$advanced_excerpt->options = wp_parse_args( $args, $advanced_excerpt->default_options );
 
 	if ( $get ) {
 		return get_the_excerpt();

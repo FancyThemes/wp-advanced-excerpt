@@ -237,11 +237,11 @@ class Advanced_Excerpt {
 		$original_post_content = $text;
 
 		// Determine allowed tags
-		if ( !isset( $allowed_tags ) ) {
+		if ( empty( $allowed_tags ) ) {
 			$allowed_tags = $this->options_all_tags;
 		}
 
-		if ( isset( $exclude_tags ) ) {
+		if ( ! empty( $exclude_tags ) ) {
 			$allowed_tags = array_diff( $allowed_tags, $exclude_tags );
 		}
 
