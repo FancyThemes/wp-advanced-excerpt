@@ -96,7 +96,7 @@ However, you can [start The Loop manually](http://codex.wordpress.org/The_Loop#M
 
 == Changelog ==
 
-== 4.2.1 ==
+= 4.2.1 =
 * Fix: Undefined index errors when using the `the_advanced_excerpt()` function
 * Fix: Not excluding tags when using the `exclude_tags` argument in the `the_advanced_excerpt()` function 
 
