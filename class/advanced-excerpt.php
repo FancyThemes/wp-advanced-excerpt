@@ -71,12 +71,6 @@ class Advanced_Excerpt {
 	}
 
 	function hook_content_filters() {
-		// Excerpt filtering should always occur on the 'get_the_excerpt' hook, regardless of page type
-		if ( 1 == $this->options['the_excerpt'] ) {
-			remove_all_filters( 'get_the_excerpt' );
-			add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
-		}
-
 		/*
 		 * Allow developers to skip running the advanced excerpt filters on certain page types.
 		 * They can do so by using the "Disable On" checkboxes on the options page or 
@@ -93,6 +87,11 @@ class Advanced_Excerpt {
 		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', $skip_page_types ); 
 		$page_type_matches = array_intersect( $page_types, $skip_page_types );
 		if ( !empty( $page_types ) && !empty( $page_type_matches ) ) return;
+
+		if ( 1 == $this->options['the_excerpt'] ) {
+			remove_all_filters( 'get_the_excerpt' );
+			add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
+		}
 
 		if ( 1 == $this->options['the_content'] ) {
 			add_filter( 'the_content', array( $this, 'filter' ) );
