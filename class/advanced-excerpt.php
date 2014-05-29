@@ -71,6 +71,12 @@ class Advanced_Excerpt {
 	}
 
 	function hook_content_filters() {
+		// Excerpt filtering should always occur on the 'get_the_excerpt' hook, regardless of page type
+		if ( 1 == $this->options['the_excerpt'] ) {
+			remove_all_filters( 'get_the_excerpt' );
+			add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
+		}
+
 		/*
 		 * Allow developers to skip running the advanced excerpt filters on certain page types.
 		 * They can do so by using the "Disable On" checkboxes on the options page or 
@@ -79,8 +85,8 @@ class Advanced_Excerpt {
 		 * The filter, when implemented, takes precedence over the options page selection.
 		 *
 		 * WordPress default themes (and others) do not use the_excerpt() or get_the_excerpt()
-		 * instead they use the_content(). As such, we also need to hook into the_content().
-		 * To ensure we're not changing the content of posts / pages we first check if is_singular().
+		 * and instead use the_content(). As such, we also need to hook into the_content().
+		 * To ensure we're not changing the content of single posts / pages we automatically exclude 'singular' page types.
 		 */
 		$page_types = $this->get_current_page_types();
 		$skip_page_types = array_unique( array_merge( array( 'singular' ), $this->options['exclude_pages'] ) );
@@ -88,12 +94,7 @@ class Advanced_Excerpt {
 		$page_type_matches = array_intersect( $page_types, $skip_page_types );
 		if ( !empty( $page_types ) && !empty( $page_type_matches ) ) return;
 
-		if( 1 == $this->options['the_excerpt'] ) {
-			remove_all_filters( 'get_the_excerpt' );
-			add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
-		}
-
-		if( 1 == $this->options['the_content'] ) {
+		if ( 1 == $this->options['the_content'] ) {
 			add_filter( 'the_content', array( $this, 'filter' ) );
 		}
 	}
@@ -218,12 +219,19 @@ class Advanced_Excerpt {
 		if ( 1 == $no_shortcode ) {
 			$text = strip_shortcodes( $text );
 		}
-		if( 1 == $this->options['the_content'] ) {
-			remove_filter( 'the_content', array( $this, 'filter' ) ); // prevent recursion
+
+		// prevent recursion on 'the_content' hook
+		$content_has_filter = false;
+		if ( has_filter( 'the_content', array( $this, 'filter' ) ) ) { 
+			remove_filter( 'the_content', array( $this, 'filter' ) ); 
+			$content_has_filter = true;
 		}
+
 		$text = apply_filters( 'the_content', $text );
-		if( 1 == $this->options['the_content'] ) {
-			add_filter( 'the_content', array( $this, 'filter' ) ); // add our filter back in
+
+		// add our filter back in
+		if ( $content_has_filter ) { 
+			add_filter( 'the_content', array( $this, 'filter' ) );
 		}
 
 		if ( $the_content_no_break && false !== strpos( $text, '<!--more-->' ) ) {

@@ -59,11 +59,14 @@ function the_advanced_excerpt( $args = '', $get = false ) {
 	}
 
 	// Set temporary options
-	$advanced_excerpt->options = wp_parse_args( $args, $advanced_excerpt->default_options );
+	$advanced_excerpt->options = wp_parse_args( $args, $advanced_excerpt->options );
 
 	if ( $get ) {
 		return get_the_excerpt();
 	} else {
 		the_excerpt();
 	}
+
+	// Reset the options back to their original state
+	$advanced_excerpt->load_options();
 }
