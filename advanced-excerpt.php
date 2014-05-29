@@ -3,12 +3,12 @@
 Plugin Name: Advanced Excerpt
 Plugin URI: http://wordpress.org/plugins/advanced-excerpt/
 Description: Control the appearance of WordPress post excerpts
-Version: 4.2.1
+Version: 4.2.2
 Author: Delicious Brains
 Author URI: http://deliciousbrains.com/
 */
 
-$GLOBALS['advanced_excerpt_version'] = '4.2.1';
+$GLOBALS['advanced_excerpt_version'] = '4.2.2';
 
 function advanced_excerpt_load_textdomain() {
 	load_plugin_textdomain( 'advanced-excerpt', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
