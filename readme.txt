@@ -97,6 +97,7 @@ However, you can [start The Loop manually](http://codex.wordpress.org/The_Loop#M
 == Changelog ==
 
 = 4.2.3 =
+* Fix: The "Remove all tags except the following" wasn't excluding tags as expected
 * Fix: Call `remove_all_filter()` on the `the_excerpt` hook to improve excerpt rendering
 
 = 4.2.2 =

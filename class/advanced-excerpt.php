@@ -244,13 +244,13 @@ class Advanced_Excerpt {
 
 		$original_post_content = $text;
 
-		// Determine allowed tags
 		if ( empty( $allowed_tags ) ) {
-			$allowed_tags = $this->options_all_tags;
+			$allowed_tags = array();
 		}
 
+		// the $exclude_tags args takes precedence over the $allowed_tags args (only if they're both defined)
 		if ( ! empty( $exclude_tags ) ) {
-			$allowed_tags = array_diff( $allowed_tags, $exclude_tags );
+			$allowed_tags = array_diff( $this->options_all_tags, $exclude_tags );
 		}
 
 		// Strip HTML if $allowed_tags_option is set to 'remove_all_tags_except'
@@ -260,6 +260,7 @@ class Advanced_Excerpt {
 			} else {
 				$tag_string = '';
 			}
+
 			$text = strip_tags( $text, $tag_string );
 		}
 
