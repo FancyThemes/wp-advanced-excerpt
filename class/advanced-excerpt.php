@@ -90,6 +90,7 @@ class Advanced_Excerpt {
 
 		if ( 1 == $this->options['the_excerpt'] ) {
 			remove_all_filters( 'get_the_excerpt' );
+			remove_all_filters( 'the_excerpt' );
 			add_filter( 'get_the_excerpt', array( $this, 'filter' ) );
 		}
 
