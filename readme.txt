@@ -101,6 +101,7 @@ However, you can [start The Loop manually](http://codex.wordpress.org/The_Loop#M
 * Fix: Call `remove_all_filter()` on the `the_excerpt` hook to improve excerpt rendering
 * Fix: Only honor the "Only filter `the_content()` when there's no break (<!--more-->) tag in the post content" setting when hooking into `the_content` filter
 * Improvement: Improve backwards compatibility by reverting back to using `get_the_content()` for the base excerpt text
+* Improvement: Added the `advanced_excerpt_skip_excerpt_filtering` filter allowing users to skip excerpt filtering on a per excerpt basis
 
 = 4.2.2 =
 * Fix: The `the_advanced_excerpt()` function was not working on singular page types (pages / posts)

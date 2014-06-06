@@ -218,6 +218,10 @@ class Advanced_Excerpt {
 	function filter( $content ) {
 		extract( wp_parse_args( $this->options, $this->default_options ), EXTR_SKIP );
 
+		if ( true === apply_filters( 'advanced_excerpt_skip_excerpt_filtering', false ) ) {
+			return $content;
+		}
+
 		global $post;
 		if ( $the_content_no_break && false !== strpos( $post->post_content, '<!--more-->' ) && 'content' == $this->filter_type ) {
 			return $content;
