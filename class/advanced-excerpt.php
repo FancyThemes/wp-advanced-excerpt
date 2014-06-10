@@ -239,7 +239,7 @@ class Advanced_Excerpt {
 			$content_has_filter = true;
 		}
 
-		$text = get_the_content();
+		$text = get_the_content( '' );
 		$text = apply_filters( 'the_content', $text );
 
 		// add our filter back in
