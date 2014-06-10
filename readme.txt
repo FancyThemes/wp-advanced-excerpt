@@ -111,7 +111,7 @@ However, you can [start The Loop manually](http://codex.wordpress.org/The_Loop#M
 * Fix: Not excluding tags when using the `exclude_tags` argument in the `the_advanced_excerpt()` function 
 
 = 4.2 =
-* Feature: Toggle excerpt filtering when there's no break (<!--more-->) tag in the post content
+* Feature: Toggle excerpt filtering when there's no break (&lt;!--more--&gt;) tag in the post content
 * Feature: Toggle excerpt filtering for the `the_excerpt()` and `the_content()` functions
 * Feature: Toggle excerpt filtering on certain page types
 * Improvement: Added HTML5 tags to the allowed tags list
