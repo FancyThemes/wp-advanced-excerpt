@@ -99,7 +99,7 @@ However, you can [start The Loop manually](http://codex.wordpress.org/The_Loop#M
 = 4.2.3 =
 * Fix: The "Remove all tags except the following" wasn't excluding tags as expected
 * Fix: Call `remove_all_filter()` on the `the_excerpt` hook to improve excerpt rendering
-* Fix: Only honor the "Only filter `the_content()` when there's no break (<!--more-->) tag in the post content" setting when hooking into `the_content` filter
+* Fix: Only honor the "Only filter `the_content()` when there's no break (&lt;!--more--&gt;) tag in the post content" setting when hooking into `the_content` filter
 * Improvement: Improve backwards compatibility by reverting back to using `get_the_content()` for the base excerpt text
 * Improvement: Added the `advanced_excerpt_skip_excerpt_filtering` filter allowing users to skip excerpt filtering on a per excerpt basis
 
