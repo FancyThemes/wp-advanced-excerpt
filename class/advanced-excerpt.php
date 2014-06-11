@@ -87,7 +87,10 @@ class Advanced_Excerpt {
 		$skip_page_types = array_unique( array_merge( array( 'singular' ), $this->options['exclude_pages'] ) );
 		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', $skip_page_types ); 
 		$page_type_matches = array_intersect( $page_types, $skip_page_types );
-		if ( !empty( $page_types ) && !empty( $page_type_matches ) ) return;
+
+		if ( empty( $page_types ) || ! empty( $page_type_matches ) ) {
+			return;
+		}
 
 		if ( 1 == $this->options['the_excerpt'] ) {
 			remove_all_filters( 'get_the_excerpt' );
@@ -113,6 +116,7 @@ class Advanced_Excerpt {
 		*/
 		$update_options = false;
 		$update_from_legacy = false;
+
 		if ( false !== get_option( 'advancedexcerpt_length' ) ) {
 			$legacy_options = array( 'length', 'use_words', 'no_custom', 'no_shortcode', 'finish_word', 'finish_sentence', 'ellipsis', 'read_more', 'add_link', 'allowed_tags' );
 
@@ -160,7 +164,7 @@ class Advanced_Excerpt {
 			if ( false !== ( $all_key = array_search( '_all', $this->options['allowed_tags'] ) ) ) {
 				unset( $this->options['allowed_tags'][$all_key] );
 				$this->options['allowed_tags_option'] = 'dont_remove_any';
-			} elseif( $update_from_legacy ) {
+			} elseif ( $update_from_legacy ) {
 				$this->options['allowed_tags_option'] = 'remove_all_tags_except';
 			}
 		}
@@ -408,7 +412,10 @@ class Advanced_Excerpt {
 
 		$page_types = array();
 		foreach( $wp_query_object_vars as $key => $value ) {
-			if ( false === strpos( $key, 'is_' ) ) continue;
+			if ( false === strpos( $key, 'is_' ) ) {
+				continue;
+			}
+			
 			if ( true === $value ) {
 				$page_types[] = str_replace( 'is_', '', $key );
 			}
