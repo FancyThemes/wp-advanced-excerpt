@@ -72,23 +72,7 @@ class Advanced_Excerpt {
 	}
 
 	function hook_content_filters() {
-		/*
-		 * Allow developers to skip running the advanced excerpt filters on certain page types.
-		 * They can do so by using the "Disable On" checkboxes on the options page or 
-		 * by passing in an array of page types they'd like to skip
-		 * e.g. array( 'search', 'author' );
-		 * The filter, when implemented, takes precedence over the options page selection.
-		 *
-		 * WordPress default themes (and others) do not use the_excerpt() or get_the_excerpt()
-		 * and instead use the_content(). As such, we also need to hook into the_content().
-		 * To ensure we're not changing the content of single posts / pages we automatically exclude 'singular' page types.
-		 */
-		$page_types = $this->get_current_page_types();
-		$skip_page_types = array_unique( array_merge( array( 'singular' ), $this->options['exclude_pages'] ) );
-		$skip_page_types = apply_filters( 'advanced_excerpt_skip_page_types', $skip_page_types ); 
-		$page_type_matches = array_intersect( $page_types, $skip_page_types );
-
-		if ( empty( $page_types ) || ! empty( $page_type_matches ) ) {
+		if ( $this->maybe_skip_excerpt_filtering() ) {
 			return;
 		}
 
@@ -101,6 +85,38 @@ class Advanced_Excerpt {
 		if ( 1 == $this->options['the_content'] ) {
 			add_filter( 'the_content', array( $this, 'filter_content' ) );
 		}
+	}
+
+	/*
+	 * Allow developers to skip running the advanced excerpt filters on certain page types.
+	 * They can do so by using the "Disable On" checkboxes on the options page or 
+	 * by passing in an array of page types they'd like to skip
+	 * e.g. array( 'search', 'author' );
+	 * The filter, when implemented, takes precedence over the options page selection.
+	 *
+	 * WordPress default themes (and others) do not use the_excerpt() or get_the_excerpt()
+	 * and instead use the_content(). As such, we also need to hook into the_content().
+	 * To ensure we're not changing the content of single posts / pages we automatically exclude 'singular' page types.
+	 */
+	function maybe_skip_excerpt_filtering() {
+		$page_types = $this->get_current_page_types();
+		$skip_page_types = array_unique( array_merge( array( 'singular' ), $this->options['exclude_pages'] ) );
+		$skip_page_types = array_unique( apply_filters( 'advanced_excerpt_skip_page_types', $skip_page_types ) ); 
+		$page_type_matches = array_intersect( $page_types, $skip_page_types );
+
+		if ( is_front_page() && ! in_array( 'front', (array) $skip_page_types ) ) {
+			return false;
+		}
+
+		if ( is_home() && ! in_array( 'home', (array) $skip_page_types ) ) {
+			return false;
+		}
+
+		if ( empty( $page_types ) || ! empty( $page_type_matches ) ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	function admin_init() {
@@ -393,7 +409,8 @@ class Advanced_Excerpt {
 
 		// provides a set of checkboxes allowing the user to exclude the excerpt filter on certain page types
 		$exclude_pages_list = array(
-			'home'			=> __( 'Home Page', 'advanced-excerpt' ),
+			'front'			=> __( 'Front Page', 'advanced-excerpt' ),
+			'home'			=> __( 'Blog Archive', 'advanced-excerpt' ),
 			'feed'			=> __( 'Posts RSS Feed', 'advanced-excerpt' ),
 			'search'		=> __( 'Search Archive', 'advanced-excerpt' ),
 			'author'		=> __( 'Author Archive', 'advanced-excerpt' ),
