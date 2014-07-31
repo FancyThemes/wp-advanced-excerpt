@@ -89,6 +89,19 @@
 					</tr>
 					<tr valign="top">
 						<th scope="row">
+							<label for="use-more-tag">
+							<?php _e( "Insert Read More Tag:", 'advanced-excerpt' ); ?>
+							</label>
+						</th>
+						<td>
+							<label for="use-more-tag">
+							<input name="use_more_tag" type="checkbox" id="use-more-tag" value="on" <?php echo ( 1 == $use_more_tag) ? 'checked="checked"' : ''; ?> />
+							<?php _e( "Allow \"Insert Read More tag\" button override excerpt maximum length. <em>(recommended)</em>", 'advanced-excerpt' ); ?>
+							</label>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row">
 							<label for="no-shortcode">
 							<?php _e( "Strip Shortcodes:", 'advanced-excerpt' ); ?>
 							</label>
