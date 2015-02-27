@@ -14,7 +14,7 @@
 		</div>
 	</div>
 
-	<form method="post" action="http://deliciousbrains.createsend.com/t/t/s/tdiull/" target="_blank" class="subscribe">
+	<form method="post" action="https://deliciousbrains.com/email-subscribe/" target="_blank" class="subscribe">
 		<h2><?php _e( 'WordPress Development and Deployment Strategy', 'advanced-excerpt' ); ?></h2>
 
 		<?php $user = wp_get_current_user(); ?>
@@ -23,16 +23,23 @@
 			<?php _e( '<strong>Free pro tips</strong> on advanced WordPress development techniques and deployment strategies.', 'advanced-excerpt' ); ?>
 		</p>
 
-		<div class="field notify-name">
-			<input type="text" name="cm-name" value="<?php echo trim( esc_attr( $user->first_name ) . ' ' . esc_attr( $user->last_name ) ); ?>" placeholder="<?php _e( 'Your Name', 'advanced-excerpt' ); ?>" />
+		<div class="field">
+			<input type="email" name="email" value="<?php echo esc_attr( $user->user_email ); ?>" placeholder="<?php _e( 'Your Email', 'advanced-excerpt' ); ?>"/>
 		</div>
 
-		<div class="field notify-email">
-			<input type="email" name="cm-tdiull-tdiull" value="<?php echo esc_attr( $user->user_email ); ?>" placeholder="<?php _e( 'Your Email', 'advanced-excerpt' ); ?>" />
+		<div class="field">
+			<input type="text" name="first_name" value="<?php echo esc_attr( trim( $user->first_name ) ); ?>" placeholder="<?php _e( 'First Name', 'advanced-excerpt' ); ?>"/>
 		</div>
+
+		<div class="field">
+			<input type="text" name="last_name" value="<?php echo esc_attr( trim( $user->last_name ) ); ?>" placeholder="<?php _e( 'Last Name', 'advanced-excerpt' ); ?>"/>
+		</div>
+
+		<input type="hidden" name="campaigns[]" value="1" />
+		<input type="hidden" name="source" value="5" />
 
 		<div class="field submit-button">
-			<input type="submit" class="button" value="<?php _e( 'Subscribe', 'advanced-excerpt' ); ?>" />
+			<input type="submit" class="button" value="<?php _e( 'Send Me Tips', 'advanced-excerpt' ); ?>" />
 		</div>
 
 		<p class="promise">
