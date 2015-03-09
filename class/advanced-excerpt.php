@@ -243,13 +243,14 @@ class Advanced_Excerpt {
 		}
 
 		global $post;
-		if ( $the_content_no_break && false !== strpos( $post->post_content, '<!--more-->' ) && 'content' == $this->filter_type ) {
+    $has_more_tag = (false !== strpos( $post->post_content, '<!--more-->' ));
+		if ( $the_content_no_break && $has_more_tag && 'content' == $this->filter_type ) {
 			return $content;
 		}
 
 		// Avoid custom excerpts
 		if ( !empty( $content ) && !$no_custom ) {
-			return $content;
+      return apply_filters( 'advanced_excerpt_custom_excerpt', $this, $content );
 		}
 
 		// prevent recursion on 'the_content' hook
@@ -300,10 +301,11 @@ class Advanced_Excerpt {
 		$text_before_trimming = $text;
 
 		// Create the excerpt
-		$text = $this->text_excerpt( $text, $length, $length_type, $finish );
+    if (!$use_more_tag || ($use_more_tag && !$has_more_tag))
+		  $text = $this->text_excerpt( $text, $length, $length_type, $finish );
 
 		// Add the ellipsis or link
-		if ( !apply_filters( 'advanced_excerpt_disable_add_more', false, $text_before_trimming, $this->options ) ) {
+		if ( $has_more_tag || !apply_filters( 'advanced_excerpt_disable_add_more', false, $text_before_trimming, $this->options ) ) {
 			$text = $this->text_add_more( $text, $ellipsis, ( $add_link ) ? $read_more : false );
 		}
 
@@ -383,7 +385,7 @@ class Advanced_Excerpt {
 		$_POST = stripslashes_deep( $_POST );
 		$this->options['length'] = (int) $_POST['length'];
 
-		$checkbox_options = array( 'no_custom', 'no_shortcode', 'add_link', 'the_excerpt', 'the_content', 'the_content_no_break' );
+		$checkbox_options = array( 'no_custom', 'use_more_tag', 'no_shortcode', 'add_link', 'the_excerpt', 'the_content', 'the_content_no_break' );
 
 		foreach ( $checkbox_options as $checkbox_option ) {
 			$this->options[$checkbox_option] = ( isset( $_POST[$checkbox_option] ) ) ? 1 : 0;
