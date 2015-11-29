@@ -3,11 +3,8 @@
 	<?php if ( isset( $_GET['settings-updated'] ) ) : ?>
 		<div id="message" class="updated fade"><p><?php _e( 'Options saved.', 'advanced-excerpt' ); ?></p></div>
 	<?php endif; ?>
-
 	<div class="advanced-excerpt-container">
-
 		<div class="advanced-excerpt-main">
-
 			<form method="post" action="" autocomplete="off">
 			<?php if ( function_exists( 'wp_nonce_field' ) ) wp_nonce_field( 'advanced_excerpt_update_options' ); ?>
 				<table class="form-table">
@@ -22,7 +19,7 @@
 							<select name="length_type">
 								<option value="characters"<?php echo ( 'characters' == $length_type ) ? ' selected="selected"' : ''; ?>><?php _e( "Characters", 'advanced-excerpt' ); ?></option>
 								<option value="words"<?php echo ( 'words' == $length_type ) ? ' selected="selected"' : ''; ?>><?php _e( "Words", 'advanced-excerpt' ); ?></option>
-							</select> 
+							</select>
 						</td>
 					</tr>
 					<tr valign="top">
@@ -123,7 +120,7 @@
 									</label>
 								</li>
 							</ul>
-							
+
 							<p class="description">
 								<?php _e( 'Themes may use <code>the_excerpt()</code> for some pages (e.g. search results) and <code>the_content()</code> on others (e.g. blog archives). Depending on your theme and what pages you want this plugin to affect, you may need to adjust these settings.', 'advanced-excerpt' ); ?>
 							</p>
@@ -135,7 +132,7 @@
 						</th>
 						<td>
 							<p>
-								<?php foreach ( $exclude_pages_list as $key => $label ) : 
+								<?php foreach ( $exclude_pages_list as $key => $label ) :
 									$key_dashed = str_replace( '_', '-', $key ); ?>
 									<label for="<?php echo $key_dashed; ?>">
 									<input name="exclude_pages[]" type="checkbox" id="<?php echo $key_dashed; ?>" value="<?php echo $key; ?>" <?php echo ( in_array( $key, $exclude_pages ) ) ? 'checked="checked"' : ''; ?> />
@@ -192,7 +189,6 @@
 									</tr>
 									<?php endif; ?>
 							</table>
-
 							<div class="tags-control"<?php echo ( 'dont_remove_any' == $allowed_tags_option ) ? ' style="display: none;"' : '' ?>>
 								<a href="" id="select-all"><?php _e( "Select all", 'advanced-excerpt' ); ?></a> / <a href="" id="select-none"><?php _e( "Select none", 'advanced-excerpt' ); ?></a><br />
 								<?php _e( "More tags", 'advanced-excerpt' ); ?>
@@ -204,17 +200,11 @@
 
 								<input type="button" name="add_tag" id="add-tag" class="button" value="<?php _e( "Add tag", 'advanced-excerpt' ); ?>" />
 							</div>
-
 						</td>
 					</tr>
 				</table>
 				<p class="submit"><input type="submit" name="Submit" class="button-primary" value="<?php _e( "Save Changes", 'advanced-excerpt' ); ?>" /></p>
 			</form>
-
 		</div>
-
-		<?php require_once $this->plugin_dir_path . 'template/sidebar.php'; ?>
-
 	</div>
-
 </div>

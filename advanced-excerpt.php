@@ -1,12 +1,13 @@
 <?php
-/*
-Plugin Name: Advanced Excerpt
-Plugin URI: http://wordpress.org/plugins/advanced-excerpt/
-Description: Control the appearance of WordPress post excerpts
-Version: 4.2.4b1
-Author: Delicious Brains
-Author URI: http://deliciousbrains.com/
-*/
+/**
+ * Plugin Name: Advanced Excerpt
+ * Plugin URI: http://wordpress.org/plugins/advanced-excerpt/
+ * Description: Control the appearance of WordPress post excerpts.
+ * Version: 4.3
+ * Author: Chris Aprea
+ * Author URI: http://twitter.com/chrisaprea
+ * License: GNU General Public License v3 or later
+ */
 
 $GLOBALS['advanced_excerpt_version'] = '4.2.4b1';
 
