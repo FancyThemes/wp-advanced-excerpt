@@ -1,0 +1,41 @@
+.advanced-excerpt {
+	.advanced-excerpt-container {
+		position: relative;
+	}
+
+	.advanced-excerpt-main {
+		margin-right: 320px;
+		min-height: 775px;
+	}
+
+	#length {
+		vertical-align: inherit;
+	}
+
+	#tags-table {
+		border-collapse: collapse;
+		td {
+			padding: 0px 20px 30px 0px;
+		}
+	}
+
+	#read-more {
+		margin-top: 7px;
+	}
+
+	.monospaced {
+		font-family: Consolas,Monaco,monospace;
+	}
+
+	.sub-options {
+		margin: 4px 0px 0px 20px;
+	}
+
+	.disabled {
+		input {
+			cursor: default;
+		}
+		color: #999999;
+		cursor: default;
+	}
+}

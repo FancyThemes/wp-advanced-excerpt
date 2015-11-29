@@ -1,5 +1,5 @@
 .sass-cache
 node_modules
-asset/*.css
-asset/*.css.map
-asset/*.min.js
+*.css
+*.css.map
+*.min.js
