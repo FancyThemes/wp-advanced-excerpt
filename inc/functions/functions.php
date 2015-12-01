@@ -1,12 +1,28 @@
 <?php
+/**
+ * Globally accessible functions for the Advanced Excerpt plugin.
+ *
+ * @package Advanced_Excerpt
+ */
 
-// Do not use outside the Loop!
-function the_advanced_excerpt( $args = '', $get = false ) {
-	global $advanced_excerpt;
-	if ( !empty( $args ) && !is_array( $args ) ) {
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Renders the post excerpt. Must not be used outside of the loop.
+ *
+ * @param  array   $args Args used to modify the output of the Advanced Excerpt.
+ * @param  boolean $get  Whether to echo or return the output.
+ * @return string        The (advanced) excerpt.
+ */
+function the_advanced_excerpt( $args = array(), $get = false ) {
+
+	$advanced_excerpt = advanced_excerpt();
+
+	if ( ! empty( $args ) && ! is_array( $args ) ) {
 		$args = wp_parse_args( $args );
 
-		// Parse query style parameters
+		// Parse query style parameters.
 		if ( isset( $args['ellipsis'] ) ) {
 			$args['ellipsis'] = urldecode( $args['ellipsis'] );
 		}
@@ -20,18 +36,17 @@ function the_advanced_excerpt( $args = '', $get = false ) {
 		}
 	}
 
-	// convert legacy arg use_words to it's udpated equivalent
+	// Convert legacy arg use_words to it's udpated equivalent.
 	if ( isset( $args['use_words'] ) ) {
 		$args['length_type'] = ( 1 == $args['use_words'] ) ? 'words' : 'characters';
 		unset( $args['use_words'] );
 	}
 
-	// convert legacy args finish_word & finish_sentence to their udpated equivalents
+	// Convert legacy args finish_word & finish_sentence to their udpated equivalents.
 	if ( isset( $args['finish_word'] ) || isset( $args['finish_sentence'] ) ) {
-
 		$defaults = array(
-			'finish_word' => 0,
-			'finish_sentence' => 0
+			'finish_word'     => 0,
+			'finish_sentence' => 0,
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -58,10 +73,10 @@ function the_advanced_excerpt( $args = '', $get = false ) {
 		}
 	}
 
-	// Set temporary options
+	// Set temporary options.
 	$advanced_excerpt->options = wp_parse_args( $args, $advanced_excerpt->options );
 
-	// Ensure our filter is hooked, regardless of the page type
+	// Ensure our filter is hooked, regardless of the page type.
 	if ( ! has_filter( 'get_the_excerpt', array( $advanced_excerpt, 'filter_excerpt' ) ) ) {
 		remove_all_filters( 'get_the_excerpt' );
 		remove_all_filters( 'the_excerpt' );
@@ -74,6 +89,6 @@ function the_advanced_excerpt( $args = '', $get = false ) {
 		the_excerpt();
 	}
 
-	// Reset the options back to their original state
+	// Reset the options back to their original state.
 	$advanced_excerpt->load_options();
 }

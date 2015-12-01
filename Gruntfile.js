@@ -5,30 +5,30 @@ module.exports = function(grunt) {
 		uglify: {
 			build: {
 				files: {
-					'asset/js/advanced-excerpt.min.js': 'asset/js/advanced-excerpt.js'
+					'assets/js/advanced-excerpt.min.js': 'assets/js/advanced-excerpt.js'
 				}
 			}
 		},
 		sass: {
 			compile: {
 				files: [ {
-					'asset/css/style.css': 'asset/sass/style.scss',
+					'assets/css/style.css': 'assets/sass/style.scss',
 				} ]
 			}
 		},
 		cssmin: {
 			css: {
-				src:  'asset/css/style.css',
-				dest: 'asset/css/style.min.css'
+				src:  'assets/css/style.css',
+				dest: 'assets/css/style.min.css'
 			}
 		},
 		watch: {
 			js: {
-				files: ['asset/js/*'],
+				files: ['assets/js/*'],
 				tasks: ['uglify'],
 			},
 			sass: {
-				files: ['asset/sass/*'],
+				files: ['assets/sass/*'],
 			}
 		},
 		makepot: {
