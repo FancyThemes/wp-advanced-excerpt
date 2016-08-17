@@ -475,7 +475,8 @@ final class Advanced_Excerpt {
 			$content_has_filter = true;
 		}
 
-		$text = get_the_content( '' );
+		//$text = get_the_content( '' );
+        $text = $content;//8iv: we should not initialize $content here :) bcoz it will lead to change in content.
 
 		// Strip shortcodes if $no_shortcode is set to 1.
 		if ( 1 === $no_shortcode ) {
