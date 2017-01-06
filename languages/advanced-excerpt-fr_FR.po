@@ -1,0 +1,262 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Advanced Excerpt\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-06 16:49+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Daniel Sallin <info@daniel-stp.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: class/advanced-excerpt.php:180 template/options.php:2
+msgid "Advanced Excerpt Options"
+msgstr "Options Advanced Excerpt"
+
+#: class/advanced-excerpt.php:180
+msgid "Excerpt"
+msgstr "Extrait"
+
+#: class/advanced-excerpt.php:201
+msgid "Settings"
+msgstr "Paramètres"
+
+#: class/advanced-excerpt.php:374
+msgid "Home Page"
+msgstr "Page principale"
+
+#: class/advanced-excerpt.php:375
+msgid "Posts RSS Feed"
+msgstr "Flux RSS"
+
+#: class/advanced-excerpt.php:376
+msgid "Search Archive"
+msgstr "Recherche d’archive"
+
+#: class/advanced-excerpt.php:377
+msgid "Author Archive"
+msgstr "Archive d’auteur"
+
+#: class/advanced-excerpt.php:378
+msgid "Category Archive"
+msgstr "Archive de catégorie"
+
+#: class/advanced-excerpt.php:379
+msgid "Tag Archive"
+msgstr "ETIQUETTE D’ARCHIVE"
+
+#: template/options.php:4
+msgid "Options saved."
+msgstr "Option sauvée."
+
+#: template/options.php:17
+msgid "Excerpt Length:"
+msgstr "Taille de l'extrait : "
+
+#: template/options.php:23
+msgid "Characters"
+msgstr "Caractères"
+
+#: template/options.php:24
+msgid "Words"
+msgstr "Mots"
+
+#: template/options.php:31
+msgid "Ellipsis:"
+msgstr "Ellipse : "
+
+#: template/options.php:37
+#, php-format
+msgid "(use <a href=\"%s\" target=\"_blank\">HTML entities</a>)"
+msgstr "(utiliser les <a href=\"%s\" target=\"_blank\">entités HTML</a>)"
+
+#: template/options.php:39
+msgid "Will substitute the part of the post that is omitted in the excerpt."
+msgstr "Substituera la partie de l'article non prise en compte dans l'extrait."
+
+#: template/options.php:44
+msgid "Finish:"
+msgstr "Terminer:"
+
+#: template/options.php:50
+msgid "Exact"
+msgstr "Exact"
+
+#: template/options.php:54
+msgid "Word"
+msgstr "Mot"
+
+#: template/options.php:58
+msgid "Sentence"
+msgstr "Phrase"
+
+#: template/options.php:62
+msgid ""
+"Prevents cutting a word or sentence at the end of an excerpt. This option "
+"can result in (slightly) longer excerpts."
+msgstr ""
+"Empêche de couper un mot ou une phrase à la fin d'un extrait. Cette option "
+"peut donner des extraits (légèrement) plus longs."
+
+#: template/options.php:67
+msgid "Read More Link:"
+msgstr "Titre du lien en savoir plus:"
+
+#: template/options.php:72
+msgid "Add read more link to excerpt"
+msgstr "Ajouter un lien plus d'informations à un extrait"
+
+#: template/options.php:80
+msgid "No Custom Excerpts:"
+msgstr "Aucun extrait personnalisé : "
+
+#: template/options.php:86
+msgid "Generate excerpts even if a post has a custom excerpt attached."
+msgstr "Générer un extrait même si un extrait personnalisé est attaché."
+
+#: template/options.php:93
+msgid "Strip Shortcodes:"
+msgstr "Supprimer les codes courts"
+
+#: template/options.php:99
+msgid "Remove shortcodes from the excerpt. <em>(recommended)</em>"
+msgstr "Supprimez les shortcodes de l'extrait. <em>(recommandé)</em>"
+
+#: template/options.php:105
+msgid "Filter:"
+msgstr "Filtre:"
+
+#: template/options.php:122
+msgid ""
+"Only filter <span class='monospaced'>the_content()</span> when there's no "
+"break (&lt;!--more--&gt;) tag in the post content"
+msgstr ""
+"Ne filtrez que <span class='monospaced'>the_content()</span> quand il n'y a "
+"pas de balise (&lt;!--more--&gt;)"
+
+#: template/options.php:128
+msgid ""
+"Themes may use <code>the_excerpt()</code> for some pages (e.g. search "
+"results) and <code>the_content()</code> on others (e.g. blog archives). "
+"Depending on your theme and what pages you want this plugin to affect, you "
+"may need to adjust these settings."
+msgstr ""
+"Les thèmes peuvent utiliser <code> the_excerpt()</code> pour certaines pages "
+"(par exemple, les résultats de recherche) et <code>the_content()</code> sur "
+"d'autres (par exemple, des archives de blog). Selon votre thème et les pages "
+"que vous souhaitez que ce plug-in affecte, vous devrez peut-être ajuster ces "
+"paramètres."
+
+#: template/options.php:134
+msgid "Disable On:"
+msgstr "Désactiver le plugin"
+
+#: template/options.php:148
+msgid "Disables excerpt filtering for certain page types."
+msgstr "Désactive le filtrage d'extrait pour certains types de page."
+
+#: template/options.php:154
+msgid "Strip Tags:"
+msgstr "Bande d’etiquette"
+
+#: template/options.php:163
+msgid "Don't remove any tags"
+msgstr "Ne pas supprimer les tags"
+
+#: template/options.php:167
+msgid "Remove all tags except the following"
+msgstr "Supprimer tout les tags sauf suivant"
+
+#: template/options.php:197
+msgid "Select all"
+msgstr "Sélectionner tout"
+
+#: template/options.php:197
+msgid "Select none"
+msgstr "Dé-Sélectionner"
+
+#: template/options.php:198
+msgid "More tags"
+msgstr "Plus de tag"
+
+#: template/options.php:205
+msgid "Add tag"
+msgstr "Ajouter un tag"
+
+#: template/options.php:211
+msgid "Save Changes"
+msgstr "Sauvegarder"
+
+#: template/sidebar.php:7
+msgid "Maintained by"
+msgstr "Maintenu par"
+
+#: template/sidebar.php:10
+msgid "Profile"
+msgstr "Profil"
+
+#: template/sidebar.php:12
+msgid "Donate"
+msgstr "Contribuer"
+
+#: template/sidebar.php:18
+msgid "WordPress Development and Deployment Strategy"
+msgstr "Stratégie de développement et de déploiement de WordPress"
+
+#: template/sidebar.php:23
+msgid ""
+"<strong>Free pro tips</strong> on advanced WordPress development techniques "
+"and deployment strategies."
+msgstr ""
+"<strong>Conseils gratuits</strong> sur les techniques avancées de "
+"développement WordPress et les stratégies de déploiement."
+
+#: template/sidebar.php:27
+msgid "Your Name"
+msgstr "Votre Nom"
+
+#: template/sidebar.php:31
+msgid "Your Email"
+msgstr "Votre E-Mail"
+
+#: template/sidebar.php:35
+msgid "Subscribe"
+msgstr "Inscription"
+
+#: template/sidebar.php:39
+msgid ""
+"I promise I will not use your email for anything else and you can "
+"unsubscribe with <span style=\"white-space: nowrap;\">1-click anytime</span>."
+msgstr ""
+"Je promets que je n'utiliserai pas votre courriel pour autre chose et que "
+"vous pourrez vous désabonner avec <span style=\"white-space: nowrap;\"> 1 "
+"clic n'importe quand </span>."
+
+#: template/sidebar.php:45
+msgid ""
+"WP Migrate DB Pro &mdash; Push and pull your database from one WordPress "
+"install to another in 1-click."
+msgstr ""
+"WP Migrate DB Pro  mdash; Poussez et tirez votre base de données d'une "
+"installation de WordPress à l'autre en 1-clic."
+
+#~ msgid "Use words?"
+#~ msgstr "Utiliser des mots ?"
+
+#~ msgid "Keep Markup:"
+#~ msgstr "Garder balises : "
+
+#~ msgid ""
+#~ "See <a href=\"http://xref.redalt.com/wptrunk/nav.htm?wp-includes/kses.php."
+#~ "source.htm\"><code>wp-includes/kses.php</code></a> if you want to control "
+#~ "more tags."
+#~ msgstr ""
+#~ "Cf. <a href=\"http://xref.redalt.com/wptrunk/nav.htm?wp-includes/kses.php."
+#~ "source.htm\"><code>wp-includes/kses.php</code></a> pour contrôler plus de "
+#~ "balises."
