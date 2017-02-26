@@ -1,0 +1,6 @@
+{
+  "name": "FancyThemes/wp-advanced-excerpt",
+  "description": "Advanced Excerpt",
+  "type": "wordpress-plugin",
+  "require": {}
+}
