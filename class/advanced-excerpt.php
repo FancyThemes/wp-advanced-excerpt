@@ -38,7 +38,7 @@ class Advanced_Excerpt {
 		$this->plugin_basename = plugin_basename( $plugin_file_path );
 		$this->plugin_base ='options-general.php?page=advanced-excerpt';
 
-		if ( 'POST' == $_SERVER['REQUEST_METHOD'] && isset( $_REQUEST['page'] ) && 'advanced-excerpt' === $_REQUEST['page'] ) {
+		if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' == $_SERVER['REQUEST_METHOD'] && isset( $_REQUEST['page'] ) && 'advanced-excerpt' === $_REQUEST['page'] ) {
 			check_admin_referer( 'advanced_excerpt_update_options' );
 			$this->update_options();
 		}
